@@ -1,0 +1,481 @@
+brand,month,spend,campaign_type,conversion_rate
+ApexMotors,2019-01,418000,Digital Ads,0.0364
+ApexMotors,2019-02,396000,Digital Ads,0.0314
+ApexMotors,2019-03,306000,TV Commercial,0.036
+ApexMotors,2019-04,371000,Dealership Event,0.0198
+ApexMotors,2019-05,113000,Sponsorship,0.0232
+ApexMotors,2019-06,404000,Sponsorship,0.0211
+ApexMotors,2019-07,66000,Sponsorship,0.0286
+ApexMotors,2019-08,436000,Dealership Event,0.037
+ApexMotors,2019-09,446000,Dealership Event,0.0385
+ApexMotors,2019-10,413000,Digital Ads,0.0269
+ApexMotors,2019-11,200000,Digital Ads,0.0383
+ApexMotors,2019-12,449000,TV Commercial,0.0364
+ApexMotors,2020-01,336000,Sponsorship,0.0387
+ApexMotors,2020-02,394000,Digital Ads,0.0312
+ApexMotors,2020-03,177000,Sponsorship,0.0337
+ApexMotors,2020-04,78000,Dealership Event,0.0372
+ApexMotors,2020-05,249000,Dealership Event,0.0263
+ApexMotors,2020-06,393000,TV Commercial,0.0292
+ApexMotors,2020-07,311000,Dealership Event,0.0324
+ApexMotors,2020-08,318000,Dealership Event,0.0178
+ApexMotors,2020-09,115000,Dealership Event,0.0327
+ApexMotors,2020-10,373000,Dealership Event,0.0167
+ApexMotors,2020-11,432000,Dealership Event,0.0237
+ApexMotors,2020-12,118000,TV Commercial,0.0415
+ApexMotors,2021-01,93000,Sponsorship,0.0357
+ApexMotors,2021-02,228000,Dealership Event,0.0184
+ApexMotors,2021-03,62000,Dealership Event,0.0209
+ApexMotors,2021-04,73000,Digital Ads,0.0192
+ApexMotors,2021-05,271000,TV Commercial,0.0302
+ApexMotors,2021-06,158000,Digital Ads,0.0206
+ApexMotors,2021-07,61000,Dealership Event,0.0218
+ApexMotors,2021-08,310000,Digital Ads,0.0334
+ApexMotors,2021-09,219000,TV Commercial,0.0261
+ApexMotors,2021-10,103000,Sponsorship,0.0327
+ApexMotors,2021-11,407000,Digital Ads,0.0192
+ApexMotors,2021-12,324000,TV Commercial,0.0174
+ApexMotors,2022-01,413000,Sponsorship,0.0269
+ApexMotors,2022-02,270000,Digital Ads,0.0177
+ApexMotors,2022-03,208000,TV Commercial,0.0227
+ApexMotors,2022-04,422000,Sponsorship,0.0345
+ApexMotors,2022-05,129000,Dealership Event,0.0295
+ApexMotors,2022-06,342000,Digital Ads,0.0357
+ApexMotors,2022-07,436000,TV Commercial,0.0186
+ApexMotors,2022-08,247000,TV Commercial,0.0277
+ApexMotors,2022-09,436000,Sponsorship,0.0377
+ApexMotors,2022-10,280000,Sponsorship,0.0226
+ApexMotors,2022-11,238000,Digital Ads,0.0273
+ApexMotors,2022-12,134000,Dealership Event,0.041
+ApexMotors,2023-01,436000,Digital Ads,0.0361
+ApexMotors,2023-02,164000,TV Commercial,0.024
+ApexMotors,2023-03,227000,Digital Ads,0.0374
+ApexMotors,2023-04,293000,Sponsorship,0.0267
+ApexMotors,2023-05,251000,Sponsorship,0.0293
+ApexMotors,2023-06,422000,Dealership Event,0.0316
+ApexMotors,2023-07,145000,Dealership Event,0.0163
+ApexMotors,2023-08,242000,Dealership Event,0.036
+ApexMotors,2023-09,301000,Dealership Event,0.0283
+ApexMotors,2023-10,203000,TV Commercial,0.0377
+ApexMotors,2023-11,370000,Dealership Event,0.0394
+ApexMotors,2023-12,417000,TV Commercial,0.0187
+Voltaic,2019-01,333000,Digital Ads,0.0158
+Voltaic,2019-02,205000,TV Commercial,0.021
+Voltaic,2019-03,442000,Digital Ads,0.0166
+Voltaic,2019-04,84000,TV Commercial,0.0251
+Voltaic,2019-05,79000,TV Commercial,0.0254
+Voltaic,2019-06,283000,Sponsorship,0.0414
+Voltaic,2019-07,372000,Digital Ads,0.0315
+Voltaic,2019-08,384000,Sponsorship,0.0166
+Voltaic,2019-09,52000,Digital Ads,0.0304
+Voltaic,2019-10,269000,TV Commercial,0.0319
+Voltaic,2019-11,446000,Sponsorship,0.04
+Voltaic,2019-12,310000,Digital Ads,0.0356
+Voltaic,2020-01,400000,TV Commercial,0.044
+Voltaic,2020-02,223000,Digital Ads,0.0441
+Voltaic,2020-03,232000,Sponsorship,0.0418
+Voltaic,2020-04,355000,Sponsorship,0.0383
+Voltaic,2020-05,100000,TV Commercial,0.0442
+Voltaic,2020-06,157000,Sponsorship,0.0403
+Voltaic,2020-07,281000,Digital Ads,0.04
+Voltaic,2020-08,156000,Dealership Event,0.0238
+Voltaic,2020-09,82000,TV Commercial,0.0272
+Voltaic,2020-10,141000,Sponsorship,0.0301
+Voltaic,2020-11,397000,Dealership Event,0.0386
+Voltaic,2020-12,287000,Digital Ads,0.0246
+Voltaic,2021-01,109000,Digital Ads,0.0173
+Voltaic,2021-02,259000,Digital Ads,0.0281
+Voltaic,2021-03,420000,Digital Ads,0.0383
+Voltaic,2021-04,416000,Dealership Event,0.0185
+Voltaic,2021-05,297000,Dealership Event,0.018
+Voltaic,2021-06,66000,Dealership Event,0.0182
+Voltaic,2021-07,373000,TV Commercial,0.0235
+Voltaic,2021-08,150000,Sponsorship,0.043
+Voltaic,2021-09,348000,Sponsorship,0.0166
+Voltaic,2021-10,70000,Sponsorship,0.0249
+Voltaic,2021-11,118000,Digital Ads,0.0369
+Voltaic,2021-12,332000,TV Commercial,0.0276
+Voltaic,2022-01,80000,TV Commercial,0.0283
+Voltaic,2022-02,257000,TV Commercial,0.0266
+Voltaic,2022-03,416000,Dealership Event,0.0523
+Voltaic,2022-04,175000,Sponsorship,0.0391
+Voltaic,2022-05,366000,Sponsorship,0.0498
+Voltaic,2022-06,402000,TV Commercial,0.0267
+Voltaic,2022-07,337000,Digital Ads,0.0496
+Voltaic,2022-08,280000,TV Commercial,0.0435
+Voltaic,2022-09,71000,Digital Ads,0.0321
+Voltaic,2022-10,160000,Digital Ads,0.0383
+Voltaic,2022-11,142000,Dealership Event,0.0498
+Voltaic,2022-12,80000,Dealership Event,0.0313
+Voltaic,2023-01,397000,Digital Ads,0.0282
+Voltaic,2023-02,264000,Sponsorship,0.0305
+Voltaic,2023-03,149000,TV Commercial,0.0383
+Voltaic,2023-04,270000,TV Commercial,0.0284
+Voltaic,2023-05,177000,Digital Ads,0.0359
+Voltaic,2023-06,414000,Dealership Event,0.0159
+Voltaic,2023-07,345000,TV Commercial,0.0289
+Voltaic,2023-08,65000,Sponsorship,
+Voltaic,2023-09,164000,Sponsorship,0.0157
+Voltaic,2023-10,152000,Digital Ads,0.0441
+Voltaic,2023-11,60000,Sponsorship,0.0379
+Voltaic,2023-12,441000,Dealership Event,0.02
+Luxus,2019-01,381000,TV Commercial,0.0282
+Luxus,2019-02,271000,Dealership Event,0.0175
+Luxus,2019-03,449000,TV Commercial,0.0223
+Luxus,2019-04,304000,Dealership Event,0.0207
+Luxus,2019-05,328000,Dealership Event,0.0347
+Luxus,2019-06,319000,Digital Ads,0.0411
+Luxus,2019-07,310000,TV Commercial,0.025
+Luxus,2019-08,388000,TV Commercial,0.0411
+Luxus,2019-09,344000,TV Commercial,0.0175
+Luxus,2019-10,430000,Dealership Event,
+Luxus,2019-11,323000,Dealership Event,0.0409
+Luxus,2019-12,212000,Sponsorship,0.0385
+Luxus,2020-01,313000,Digital Ads,0.0434
+Luxus,2020-02,318000,TV Commercial,0.0311
+Luxus,2020-03,229000,TV Commercial,0.0406
+Luxus,2020-04,346000,TV Commercial,0.0301
+Luxus,2020-05,72000,TV Commercial,0.0388
+Luxus,2020-06,289000,TV Commercial,0.0429
+Luxus,2020-07,329000,Sponsorship,0.0203
+Luxus,2020-08,92000,Digital Ads,0.027
+Luxus,2020-09,371000,Digital Ads,0.0271
+Luxus,2020-10,80000,Digital Ads,0.0385
+Luxus,2020-11,439000,Sponsorship,0.0355
+Luxus,2020-12,67000,Digital Ads,0.0412
+Luxus,2021-01,136000,TV Commercial,0.0193
+Luxus,2021-02,231000,Dealership Event,0.0312
+Luxus,2021-03,301000,Sponsorship,0.038
+Luxus,2021-04,209000,TV Commercial,0.0304
+Luxus,2021-05,440000,Digital Ads,0.0344
+Luxus,2021-06,409000,Digital Ads,0.0189
+Luxus,2021-07,338000,Sponsorship,0.0182
+Luxus,2021-08,411000,TV Commercial,0.0348
+Luxus,2021-09,290000,Digital Ads,0.0359
+Luxus,2021-10,205000,Sponsorship,0.0386
+Luxus,2021-11,61000,Digital Ads,0.032
+Luxus,2021-12,81000,Digital Ads,0.0377
+Luxus,2022-01,225000,TV Commercial,0.0336
+Luxus,2022-02,257000,Dealership Event,0.0186
+Luxus,2022-03,198000,Sponsorship,0.0369
+Luxus,2022-04,392000,Dealership Event,0.036
+Luxus,2022-05,343000,Digital Ads,0.0384
+Luxus,2022-06,227000,Sponsorship,0.0169
+Luxus,2022-07,306000,Dealership Event,0.018
+Luxus,2022-08,282000,Dealership Event,0.0391
+Luxus,2022-09,136000,Sponsorship,0.0216
+Luxus,2022-10,114000,Digital Ads,0.0325
+Luxus,2022-11,229000,Dealership Event,0.0396
+Luxus,2022-12,85000,Digital Ads,0.018
+Luxus,2023-01,216000,TV Commercial,0.0242
+Luxus,2023-02,138000,TV Commercial,0.0335
+Luxus,2023-03,198000,Sponsorship,0.0273
+Luxus,2023-04,131000,TV Commercial,0.026
+Luxus,2023-05,230000,Dealership Event,0.0232
+Luxus,2023-06,282000,Dealership Event,0.0206
+Luxus,2023-07,221000,TV Commercial,0.0348
+Luxus,2023-08,400000,Sponsorship,0.0386
+Luxus,2023-09,131000,Sponsorship,0.0329
+Luxus,2023-10,446000,Sponsorship,0.0312
+Luxus,2023-11,243000,Dealership Event,0.0174
+Luxus,2023-12,369000,TV Commercial,0.0157
+TerraAuto,2019-01,77000,TV Commercial,0.0321
+TerraAuto,2019-02,194000,TV Commercial,0.0185
+TerraAuto,2019-03,417000,Digital Ads,0.043
+TerraAuto,2019-04,389000,Digital Ads,0.0209
+TerraAuto,2019-05,175000,TV Commercial,0.0192
+TerraAuto,2019-06,356000,Dealership Event,0.0312
+TerraAuto,2019-07,353000,Sponsorship,0.0272
+TerraAuto,2019-08,297000,Digital Ads,0.021
+TerraAuto,2019-09,232000,Digital Ads,0.0355
+TerraAuto,2019-10,143000,Digital Ads,0.02
+TerraAuto,2019-11,180000,Sponsorship,0.0208
+TerraAuto,2019-12,66000,Digital Ads,0.0423
+TerraAuto,2020-01,187000,Dealership Event,0.0378
+TerraAuto,2020-02,407000,Sponsorship,0.037
+TerraAuto,2020-03,435000,Digital Ads,0.0335
+TerraAuto,2020-04,416000,Digital Ads,0.0173
+TerraAuto,2020-05,365000,Dealership Event,0.0333
+TerraAuto,2020-06,156000,TV Commercial,0.034
+TerraAuto,2020-07,259000,Digital Ads,0.0382
+TerraAuto,2020-08,223000,Sponsorship,0.0178
+TerraAuto,2020-09,102000,Dealership Event,0.016
+TerraAuto,2020-10,191000,Sponsorship,0.0429
+TerraAuto,2020-11,167000,TV Commercial,0.0309
+TerraAuto,2020-12,122000,Digital Ads,0.0305
+TerraAuto,2021-01,207000,Sponsorship,0.0368
+TerraAuto,2021-02,342000,Dealership Event,0.0164
+TerraAuto,2021-03,374000,Dealership Event,0.0298
+TerraAuto,2021-04,309000,Dealership Event,0.0169
+TerraAuto,2021-05,106000,TV Commercial,0.0279
+TerraAuto,2021-06,277000,Digital Ads,0.0427
+TerraAuto,2021-07,261000,TV Commercial,0.0348
+TerraAuto,2021-08,102000,Digital Ads,0.025
+TerraAuto,2021-09,399000,Digital Ads,0.0423
+TerraAuto,2021-10,412000,Dealership Event,0.0275
+TerraAuto,2021-11,442000,Digital Ads,0.0301
+TerraAuto,2021-12,446000,Digital Ads,0.0434
+TerraAuto,2022-01,153000,Digital Ads,0.0353
+TerraAuto,2022-02,173000,Dealership Event,0.0415
+TerraAuto,2022-03,448000,Digital Ads,0.0342
+TerraAuto,2022-04,447000,Digital Ads,
+TerraAuto,2022-05,119000,Dealership Event,0.0177
+TerraAuto,2022-06,195000,Digital Ads,0.0327
+TerraAuto,2022-07,325000,Digital Ads,0.017
+TerraAuto,2022-08,144000,Digital Ads,0.0408
+TerraAuto,2022-09,248000,Dealership Event,0.032
+TerraAuto,2022-10,158000,Sponsorship,0.0275
+TerraAuto,2022-11,305000,Sponsorship,0.0158
+TerraAuto,2022-12,296000,Digital Ads,0.0444
+TerraAuto,2023-01,116000,Sponsorship,0.0292
+TerraAuto,2023-02,174000,Dealership Event,0.0436
+TerraAuto,2023-03,415000,Digital Ads,0.0436
+TerraAuto,2023-04,80000,Dealership Event,0.0386
+TerraAuto,2023-05,82000,Sponsorship,0.0273
+TerraAuto,2023-06,169000,Dealership Event,0.0172
+TerraAuto,2023-07,240000,Sponsorship,0.0188
+TerraAuto,2023-08,243000,Digital Ads,0.0361
+TerraAuto,2023-09,214000,Digital Ads,0.042
+TerraAuto,2023-10,91000,Sponsorship,0.0277
+TerraAuto,2023-11,355000,Dealership Event,0.0419
+TerraAuto,2023-12,156000,Dealership Event,0.0237
+Stratos,2019-01,124000,Sponsorship,0.038
+Stratos,2019-02,388000,Sponsorship,0.0433
+Stratos,2019-03,260000,Digital Ads,0.0305
+Stratos,2019-04,76000,Digital Ads,0.0446
+Stratos,2019-05,254000,Digital Ads,
+Stratos,2019-06,440000,Sponsorship,0.0223
+Stratos,2019-07,188000,Sponsorship,0.0351
+Stratos,2019-08,71000,Digital Ads,0.0213
+Stratos,2019-09,51000,Digital Ads,0.0222
+Stratos,2019-10,239000,Sponsorship,0.0257
+Stratos,2019-11,77000,Sponsorship,0.0171
+Stratos,2019-12,309000,TV Commercial,0.0242
+Stratos,2020-01,434000,Digital Ads,0.0225
+Stratos,2020-02,400000,TV Commercial,0.0402
+Stratos,2020-03,127000,Digital Ads,0.0157
+Stratos,2020-04,127000,TV Commercial,0.0387
+Stratos,2020-05,150000,Dealership Event,0.0321
+Stratos,2020-06,188000,Digital Ads,0.0165
+Stratos,2020-07,169000,Dealership Event,0.0407
+Stratos,2020-08,178000,Digital Ads,0.0296
+Stratos,2020-09,116000,Dealership Event,0.0389
+Stratos,2020-10,377000,TV Commercial,0.0399
+Stratos,2020-11,239000,Dealership Event,0.0424
+Stratos,2020-12,340000,Sponsorship,0.0264
+Stratos,2021-01,81000,Sponsorship,0.0284
+Stratos,2021-02,186000,TV Commercial,0.0295
+Stratos,2021-03,198000,TV Commercial,0.0369
+Stratos,2021-04,184000,Sponsorship,0.0308
+Stratos,2021-05,224000,Sponsorship,0.0182
+Stratos,2021-06,355000,Dealership Event,0.0307
+Stratos,2021-07,310000,Sponsorship,0.022
+Stratos,2021-08,375000,TV Commercial,0.0221
+Stratos,2021-09,429000,TV Commercial,0.042
+Stratos,2021-10,417000,Dealership Event,0.0177
+Stratos,2021-11,369000,TV Commercial,0.0203
+Stratos,2021-12,416000,Dealership Event,0.0371
+Stratos,2022-01,369000,TV Commercial,0.0367
+Stratos,2022-02,184000,Digital Ads,0.0245
+Stratos,2022-03,406000,Dealership Event,0.0167
+Stratos,2022-04,96000,TV Commercial,0.0244
+Stratos,2022-05,441000,TV Commercial,0.0201
+Stratos,2022-06,244000,TV Commercial,0.0379
+Stratos,2022-07,190000,Sponsorship,0.0366
+Stratos,2022-08,74000,Dealership Event,0.0249
+Stratos,2022-09,329000,TV Commercial,0.0313
+Stratos,2022-10,244000,Digital Ads,0.0396
+Stratos,2022-11,427000,Dealership Event,0.0208
+Stratos,2022-12,96000,Dealership Event,0.0256
+Stratos,2023-01,69000,Sponsorship,0.0334
+Stratos,2023-02,89000,Digital Ads,0.0309
+Stratos,2023-03,375000,Sponsorship,
+Stratos,2023-04,250000,Dealership Event,0.0276
+Stratos,2023-05,233000,Sponsorship,0.0361
+Stratos,2023-06,103000,Digital Ads,0.0426
+Stratos,2023-07,91000,Digital Ads,0.0444
+Stratos,2023-08,125000,TV Commercial,0.0205
+Stratos,2023-09,234000,TV Commercial,0.0284
+Stratos,2023-10,257000,Dealership Event,0.0243
+Stratos,2023-11,353000,Dealership Event,0.0314
+Stratos,2023-12,140000,TV Commercial,0.0393
+OmniCar,2019-01,312000,Dealership Event,0.042
+OmniCar,2019-02,156000,Digital Ads,0.038
+OmniCar,2019-03,183000,Dealership Event,0.0223
+OmniCar,2019-04,141000,TV Commercial,0.0269
+OmniCar,2019-05,254000,Digital Ads,0.0208
+OmniCar,2019-06,231000,Dealership Event,0.0221
+OmniCar,2019-07,381000,Dealership Event,0.0217
+OmniCar,2019-08,214000,Digital Ads,0.0216
+OmniCar,2019-09,137000,Sponsorship,0.0247
+OmniCar,2019-10,240000,Sponsorship,0.0238
+OmniCar,2019-11,355000,TV Commercial,0.0176
+OmniCar,2019-12,226000,Dealership Event,0.0319
+OmniCar,2020-01,261000,Sponsorship,0.0397
+OmniCar,2020-02,126000,Digital Ads,0.0303
+OmniCar,2020-03,123000,TV Commercial,0.0286
+OmniCar,2020-04,300000,Sponsorship,0.0201
+OmniCar,2020-05,325000,TV Commercial,0.0403
+OmniCar,2020-06,158000,Sponsorship,0.0167
+OmniCar,2020-07,444000,Dealership Event,0.0269
+OmniCar,2020-08,117000,TV Commercial,
+OmniCar,2020-09,116000,Sponsorship,0.0426
+OmniCar,2020-10,100000,Digital Ads,0.0348
+OmniCar,2020-11,67000,Digital Ads,0.0176
+OmniCar,2020-12,332000,Dealership Event,0.0253
+OmniCar,2021-01,403000,Dealership Event,0.017
+OmniCar,2021-02,329000,TV Commercial,0.0314
+OmniCar,2021-03,163000,Sponsorship,0.0361
+OmniCar,2021-04,331000,Dealership Event,0.0224
+OmniCar,2021-05,120000,Dealership Event,0.0353
+OmniCar,2021-06,60000,Dealership Event,0.0373
+OmniCar,2021-07,252000,TV Commercial,0.0242
+OmniCar,2021-08,360000,Dealership Event,0.0153
+OmniCar,2021-09,55000,Sponsorship,0.0391
+OmniCar,2021-10,400000,Digital Ads,0.0204
+OmniCar,2021-11,441000,Sponsorship,0.0382
+OmniCar,2021-12,137000,TV Commercial,0.0196
+OmniCar,2022-01,443000,TV Commercial,0.0198
+OmniCar,2022-02,310000,Digital Ads,0.0267
+OmniCar,2022-03,116000,Dealership Event,0.0209
+OmniCar,2022-04,128000,Digital Ads,0.0447
+OmniCar,2022-05,318000,Sponsorship,0.0232
+OmniCar,2022-06,414000,Digital Ads,0.0377
+OmniCar,2022-07,187000,Dealership Event,0.0407
+OmniCar,2022-08,425000,Sponsorship,0.03
+OmniCar,2022-09,145000,TV Commercial,0.0284
+OmniCar,2022-10,392000,Digital Ads,0.0406
+OmniCar,2022-11,105000,TV Commercial,0.0343
+OmniCar,2022-12,390000,Digital Ads,0.0327
+OmniCar,2023-01,284000,Dealership Event,0.0232
+OmniCar,2023-02,442000,TV Commercial,0.0443
+OmniCar,2023-03,361000,Digital Ads,0.0164
+OmniCar,2023-04,387000,Digital Ads,0.0279
+OmniCar,2023-05,212000,Sponsorship,0.0414
+OmniCar,2023-06,171000,Digital Ads,0.0372
+OmniCar,2023-07,74000,Sponsorship,0.0286
+OmniCar,2023-08,289000,Sponsorship,0.0348
+OmniCar,2023-09,422000,Sponsorship,0.0275
+OmniCar,2023-10,170000,Dealership Event,0.0196
+OmniCar,2023-11,389000,Digital Ads,0.0293
+OmniCar,2023-12,228000,Digital Ads,0.0155
+Zenith,2019-01,98000,Dealership Event,0.033
+Zenith,2019-02,311000,TV Commercial,0.0398
+Zenith,2019-03,252000,Dealership Event,0.0364
+Zenith,2019-04,444000,TV Commercial,0.017
+Zenith,2019-05,193000,Dealership Event,0.0426
+Zenith,2019-06,385000,TV Commercial,0.0367
+Zenith,2019-07,242000,Sponsorship,0.0415
+Zenith,2019-08,340000,Dealership Event,0.0354
+Zenith,2019-09,205000,TV Commercial,0.0207
+Zenith,2019-10,332000,Digital Ads,0.0208
+Zenith,2019-11,150000,TV Commercial,0.0152
+Zenith,2019-12,145000,Dealership Event,0.0188
+Zenith,2020-01,330000,Digital Ads,0.0237
+Zenith,2020-02,189000,Dealership Event,0.0257
+Zenith,2020-03,251000,TV Commercial,0.0394
+Zenith,2020-04,305000,TV Commercial,0.0439
+Zenith,2020-05,306000,TV Commercial,0.0171
+Zenith,2020-06,191000,Sponsorship,0.0382
+Zenith,2020-07,279000,Dealership Event,0.02
+Zenith,2020-08,196000,Sponsorship,0.0222
+Zenith,2020-09,124000,Dealership Event,0.0341
+Zenith,2020-10,397000,Dealership Event,0.026
+Zenith,2020-11,336000,Sponsorship,0.0199
+Zenith,2020-12,228000,Sponsorship,0.0323
+Zenith,2021-01,272000,Dealership Event,0.0382
+Zenith,2021-02,104000,Digital Ads,0.044
+Zenith,2021-03,309000,Sponsorship,0.039
+Zenith,2021-04,97000,Dealership Event,0.0166
+Zenith,2021-05,443000,TV Commercial,0.0332
+Zenith,2021-06,441000,Dealership Event,0.0182
+Zenith,2021-07,431000,Sponsorship,0.0406
+Zenith,2021-08,394000,Sponsorship,0.0236
+Zenith,2021-09,408000,Dealership Event,0.0265
+Zenith,2021-10,255000,Digital Ads,
+Zenith,2021-11,302000,Dealership Event,0.0278
+Zenith,2021-12,90000,Digital Ads,0.0449
+Zenith,2022-01,347000,TV Commercial,0.0272
+Zenith,2022-02,285000,Dealership Event,0.037
+Zenith,2022-03,296000,Dealership Event,0.0392
+Zenith,2022-04,369000,Dealership Event,0.024
+Zenith,2022-05,402000,Dealership Event,0.0239
+Zenith,2022-06,347000,Digital Ads,0.0341
+Zenith,2022-07,238000,Dealership Event,0.0291
+Zenith,2022-08,366000,Sponsorship,0.0239
+Zenith,2022-09,207000,Digital Ads,0.0231
+Zenith,2022-10,138000,Dealership Event,0.0192
+Zenith,2022-11,84000,Sponsorship,0.0372
+Zenith,2022-12,242000,Dealership Event,0.0304
+Zenith,2023-01,230000,Digital Ads,0.0152
+Zenith,2023-02,208000,Sponsorship,0.0329
+Zenith,2023-03,266000,Dealership Event,0.0332
+Zenith,2023-04,288000,Digital Ads,0.0234
+Zenith,2023-05,80000,Sponsorship,0.0241
+Zenith,2023-06,445000,Digital Ads,0.0439
+Zenith,2023-07,415000,TV Commercial,0.0197
+Zenith,2023-08,132000,TV Commercial,0.0226
+Zenith,2023-09,208000,Dealership Event,0.0189
+Zenith,2023-10,358000,Sponsorship,0.0285
+Zenith,2023-11,214000,Digital Ads,0.0201
+Zenith,2023-12,239000,TV Commercial,0.0251
+Ascent,2019-01,376000,Sponsorship,0.0239
+Ascent,2019-02,121000,TV Commercial,0.0328
+Ascent,2019-03,67000,Sponsorship,0.0232
+Ascent,2019-04,79000,TV Commercial,0.0237
+Ascent,2019-05,433000,Sponsorship,0.0409
+Ascent,2019-06,403000,Dealership Event,0.0372
+Ascent,2019-07,249000,Dealership Event,0.0338
+Ascent,2019-08,284000,Digital Ads,0.0273
+Ascent,2019-09,387000,Sponsorship,0.0439
+Ascent,2019-10,236000,Sponsorship,0.0329
+Ascent,2019-11,234000,TV Commercial,0.0363
+Ascent,2019-12,341000,Digital Ads,0.0352
+Ascent,2020-01,368000,Dealership Event,0.0226
+Ascent,2020-02,261000,Digital Ads,0.0368
+Ascent,2020-03,409000,TV Commercial,0.0401
+Ascent,2020-04,234000,TV Commercial,0.0307
+Ascent,2020-05,75000,TV Commercial,0.0283
+Ascent,2020-06,397000,Dealership Event,0.0396
+Ascent,2020-07,119000,Dealership Event,0.027
+Ascent,2020-08,191000,Sponsorship,0.0188
+Ascent,2020-09,417000,Dealership Event,0.0219
+Ascent,2020-10,364000,Dealership Event,0.0266
+Ascent,2020-11,177000,Dealership Event,0.0364
+Ascent,2020-12,327000,Digital Ads,0.0259
+Ascent,2021-01,172000,TV Commercial,0.0433
+Ascent,2021-02,166000,Digital Ads,0.0247
+Ascent,2021-03,191000,Digital Ads,0.0242
+Ascent,2021-04,240000,Digital Ads,0.03
+Ascent,2021-05,388000,Digital Ads,0.0448
+Ascent,2021-06,128000,Digital Ads,0.0151
+Ascent,2021-07,181000,Sponsorship,0.0176
+Ascent,2021-08,402000,Sponsorship,0.0163
+Ascent,2021-09,50000,Digital Ads,0.0191
+Ascent,2021-10,368000,Digital Ads,0.02
+Ascent,2021-11,103000,Dealership Event,0.0335
+Ascent,2021-12,133000,TV Commercial,0.0268
+Ascent,2022-01,300000,Digital Ads,0.0162
+Ascent,2022-02,116000,Sponsorship,0.0262
+Ascent,2022-03,347000,Digital Ads,0.0298
+Ascent,2022-04,178000,TV Commercial,0.0164
+Ascent,2022-05,448000,Digital Ads,0.0154
+Ascent,2022-06,313000,Dealership Event,0.0351
+Ascent,2022-07,125000,Digital Ads,0.0253
+Ascent,2022-08,431000,Digital Ads,0.0371
+Ascent,2022-09,444000,TV Commercial,0.0349
+Ascent,2022-10,191000,Dealership Event,0.0374
+Ascent,2022-11,338000,Sponsorship,0.024
+Ascent,2022-12,367000,Digital Ads,0.0196
+Ascent,2023-01,92000,Digital Ads,0.0272
+Ascent,2023-02,260000,Sponsorship,0.0358
+Ascent,2023-03,251000,Sponsorship,0.0351
+Ascent,2023-04,270000,Digital Ads,0.0217
+Ascent,2023-05,312000,Sponsorship,0.0313
+Ascent,2023-06,307000,Sponsorship,0.0396
+Ascent,2023-07,245000,Dealership Event,0.0313
+Ascent,2023-08,239000,Dealership Event,0.0306
+Ascent,2023-09,94000,Sponsorship,0.0268
+Ascent,2023-10,164000,Dealership Event,0.0253
+Ascent,2023-11,404000,TV Commercial,0.0303
+Ascent,2023-12,203000,Dealership Event,0.0159

@@ -1,0 +1,126 @@
+movie_id,title,genre,release_date,production_budget,language,availability_status
+M101,Cybernetic Dawn,Sci-Fi,2023-02-15,8000000,French,Active
+M102,Starlight Odyssey,Sci-Fi,2019-04-15,22000000,English,Active
+M103,Quantum Mirage,Sci-Fi,2022-02-15,80000000,Korean,Active
+M104,Project Kepler,Sci-Fi,2018-01-15,16000000,Spanish,Archived
+M105,Neon Grid,Sci-Fi,2022-01-15,76000000,Spanish,Active
+M106,Chronos Protocol,Sci-Fi,2023-11-15,74000000,Korean,Active
+M107,Interstellar Drift,Sci-Fi,2019-08-15,80000000,French,Active
+M108,Parallel Singularity,Sci-Fi,2018-03-15,59000000,French,Archived
+M109,The Void Horizon,Sci-Fi,2019-06-15,18000000,English,Archived
+M110,Echoes of Andromeda,Sci-Fi,2020-06-15,38000000,English,Active
+M111,Carbon Copy,Sci-Fi,2023-08-15,73000000,English,Active
+M112,Binary Eclipse,Sci-Fi,2021-02-15,75000000,French,Active
+M113,Synthetic Souls,Sci-Fi,2023-10-15,51000000,Japanese,Active
+M114,Aegis Engine,Sci-Fi,2019-12-15,13000000,English,Active
+M115,Gravity Well,Sci-Fi,2020-02-15,34000000,English,Active
+M116,Omega Sector,Sci-Fi,2021-05-15,63000000,French,Active
+M117,Solar Wind,Sci-Fi,2019-06-15,50000000,Spanish,Active
+M118,Warp Core,Sci-Fi,2023-11-15,14000000,Japanese,Active
+M119,Dark Matter,Sci-Fi,2023-03-15,73000000,Spanish,Active
+M120,AI Genesis,Sci-Fi,2019-08-15,53000000,French,Active
+M121,NeuroLink,Sci-Fi,2023-12-15,76000000,Spanish,Active
+M122,Quantum Leap,Sci-Fi,2023-06-15,12000000,Spanish,Active
+M123,The Singularity,Sci-Fi,2018-06-15,56000000,French,Archived
+M124,Nanite,Sci-Fi,2022-12-15,45000000,Spanish,Active
+M125,Exo-Suit,Sci-Fi,2023-08-15,55000000,Korean,Active
+M126,Bullet Storm,Action,2019-05-15,22000000,Spanish,Active
+M127,Apex Predator,Action,2022-05-15,79000000,Korean,Active
+M128,Velocity Zero,Action,2022-07-15,51000000,Spanish,Active
+M129,Redline Fury,Action,2019-09-15,68000000,English,Active
+M130,Iron Fist,Action,2018-03-15,25000000,Korean,Archived
+M131,Silent Strike,Action,2021-07-15,64000000,Japanese,Active
+M132,Rogue Vanguard,Action,2020-09-15,6000000,English,Active
+M133,Tactical Strike,Action,2023-09-15,39000000,French,Active
+M134,Overdrive,Action,2018-05-15,60000000,Spanish,Archived
+M135,Double Trigger,Action,2023-12-15,38000000,Japanese,Active
+M136,Deadly Cascade,Action,2019-09-15,18000000,French,Active
+M137,Reckoning Day,Action,2022-10-15,30000000,Spanish,Active
+M138,Gridlock,Action,2020-03-15,74000000,Japanese,Active
+M139,The Safehouse,Action,2018-10-15,46000000,Korean,Archived
+M140,Extraction Point,Action,2020-05-15,35000000,English,Active
+M141,Shadow Protocol,Action,2019-10-15,15000000,English,Active
+M142,Mercenary Run,Action,2018-09-15,21000000,Spanish,Active
+M143,Final Stand,Action,2022-03-15,38000000,Japanese,Active
+M144,Steel Rain,Action,2022-07-15,32000000,Japanese,Active
+M145,The Enforcer,Action,2023-12-15,30000000,French,Active
+M146,Black Ops,Action,2021-11-15,52000000,Korean,Active
+M147,High Tension,Action,2022-08-15,20000000,Spanish,Active
+M148,Rapid Fire,Action,2019-02-15,48000000,English,Archived
+M149,Counter-Strike,Action,2019-10-15,33000000,English,Archived
+M150,Close Quarters,Action,2023-01-15,34000000,English,Active
+M151,Accidental Spies,Comedy,2018-06-15,14000000,Japanese,Archived
+M152,Roommate Havoc,Comedy,2023-08-15,32000000,Japanese,Active
+M153,Office Shenanigans,Comedy,2019-12-15,78000000,Japanese,Archived
+M154,Double Booked,Comedy,2021-07-15,29000000,English,Active
+M155,The Great Escapade,Comedy,2018-11-15,60000000,French,Archived
+M156,Bizarre Bazaar,Comedy,2021-12-15,11000000,English,Active
+M157,Total Flop,Comedy,2018-07-15,48000000,English,Archived
+M158,Wedding Crashers 2.0,Comedy,2019-09-15,62000000,Spanish,Archived
+M159,Bad Hair Day,Comedy,2020-08-15,36000000,English,Active
+M160,Corporate Clowns,Comedy,2021-09-15,17000000,English,Active
+M161,Diner Disasters,Comedy,2023-09-15,6000000,English,Active
+M162,Camp Chaos,Comedy,2019-03-15,57000000,Korean,Archived
+M163,Lost in Translation,Comedy,2021-01-15,26000000,Korean,Active
+M164,Pet Peeves,Comedy,2018-07-15,38000000,Korean,Archived
+M165,The Laughing Stock,Comedy,2023-12-15,76000000,Korean,Active
+M166,Unlikely Allies,Comedy,2019-04-15,42000000,Spanish,Active
+M167,Undercover Nerds,Comedy,2022-12-15,74000000,English,Active
+M168,Prank Wars,Comedy,2023-06-15,12000000,English,Active
+M169,The Gaffe,Comedy,2022-08-15,69000000,Japanese,Active
+M170,Hilarious Heist,Comedy,2019-01-15,70000000,English,Active
+M171,Silly Business,Comedy,2018-10-15,13000000,Spanish,Archived
+M172,Gag Reel,Comedy,2022-04-15,79000000,Japanese,Active
+M173,Joke of the Town,Comedy,2018-10-15,15000000,Korean,Active
+M174,Out of Hand,Comedy,2022-09-15,45000000,French,Active
+M175,The Comedy of Errors,Comedy,2019-11-15,45000000,Spanish,Archived
+M176,Midnight Coffee,Romance,2019-11-15,43000000,Korean,Archived
+M177,Autumn Whispers,Romance,2018-01-15,63000000,Japanese,Active
+M178,Summer Love Letters,Romance,2018-02-15,73000000,Spanish,Archived
+M179,Sketches of You,Romance,2019-06-15,13000000,Spanish,Archived
+M180,Under the Umbrella,Romance,2019-08-15,74000000,French,Active
+M181,Lost in Paris,Romance,2023-09-15,6000000,Japanese,Active
+M182,Rendezvous,Romance,2020-11-15,18000000,Spanish,Active
+M183,Before Sunset,Romance,2020-02-15,18000000,Japanese,Active
+M184,Heartbeats,Romance,2019-05-15,41000000,Japanese,Archived
+M185,The Canvas of Love,Romance,2020-04-15,38000000,Japanese,Active
+M186,A Walk in the Rain,Romance,2021-05-15,11000000,English,Active
+M187,Love in Stereo,Romance,2023-07-15,40000000,English,Active
+M188,Unwritten Love,Romance,2018-06-15,21000000,French,Archived
+M189,Chasing Horizons,Romance,2021-09-15,59000000,Japanese,Active
+M190,Serenade,Romance,2018-02-15,14000000,Spanish,Archived
+M191,Coincidence,Romance,2020-10-15,75000000,Spanish,Active
+M192,The Last Dance,Romance,2021-03-15,10000000,French,Active
+M193,Dear Diary,Romance,2020-01-15,50000000,Spanish,Active
+M194,Blind Date,Romance,2023-04-15,18000000,French,Active
+M195,A Crimson Rose,Romance,2022-07-15,24000000,Spanish,Active
+M196,Ethereal Connection,Romance,2019-03-15,57000000,English,Archived
+M197,Cupid's Arrow,Romance,2020-07-15,36000000,French,Active
+M198,Sweethearts,Romance,2019-12-15,18000000,Korean,Active
+M199,True Melodies,Romance,2021-04-15,30000000,Korean,Active
+M200,Destined Paths,Romance,2020-05-15,34000000,Spanish,Active
+M201,Shattered Glass,Drama,2018-11-15,29000000,Korean,Archived
+M202,The Silent Witness,Drama,2018-05-15,49000000,Japanese,Archived
+M203,Echoes of the Past,Drama,2022-06-15,8000000,English,Active
+M204,Fallen Leaves,Drama,2020-03-15,79000000,French,Active
+M205,The Long Road Home,Drama,2018-02-15,60000000,French,Active
+M206,Threads of Time,Drama,2020-07-15,70000000,English,Active
+M207,A Father's Shadow,Drama,2021-10-15,29000000,French,Active
+M208,A Place of My Own,Drama,2018-12-15,60000000,English,Archived
+M209,Whispering Pines,Drama,2022-11-15,30000000,French,Active
+M210,Tears of Silver,Drama,2021-02-15,47000000,Japanese,Active
+M211,Broken Promises,Drama,2020-11-15,20000000,French,Active
+M212,The Trial,Drama,2022-05-15,57000000,French,Active
+M213,Legacy,Drama,2021-12-15,42000000,Japanese,Active
+M214,Redemption,Drama,2019-04-15,58000000,Korean,Active
+M215,The Crossroads,Drama,2019-10-15,77000000,French,Archived
+M216,Solitude,Drama,2018-05-15,41000000,Spanish,Archived
+M217,The Inheritance,Drama,2022-10-15,46000000,Korean,Active
+M218,Stolen Moments,Drama,2021-08-15,32000000,Japanese,Active
+M219,Chasing Dreams,Drama,2021-12-15,26000000,English,Active
+M220,The Last Chapter,Drama,2020-09-15,47000000,English,Active
+M221,Beyond the Storm,Drama,2019-11-15,44000000,Spanish,Active
+M222,Beneath the Surface,Drama,2019-01-15,10000000,Spanish,Active
+M223,The Portrait,Drama,2022-02-15,63000000,Korean,Active
+M224,An Open Book,Drama,2023-10-15,29000000,Korean,Active
+M225,The Final Verdict,Drama,2021-07-15,36000000,Spanish,Active

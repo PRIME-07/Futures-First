@@ -1,0 +1,2272 @@
+{
+    "row_counts": {
+        "movies": {
+            "sql_movies.csv": 125,
+            "sql_regional_engagement.csv": 8000,
+            "sql_streaming_metrics.csv": 3316,
+            "sql_subscriptions.csv": 60,
+            "xlsx_content_performance.xlsx": 20,
+            "csv_critic_reviews.csv": 303,
+            "csv_marketing_spend.csv": 608
+        },
+        "automotive": {
+            "sql_car_models.csv": 102,
+            "sql_dealership_performance.csv": 900,
+            "sql_financing.csv": 240,
+            "sql_monthly_sales.csv": 3580,
+            "csv_ad_spend.csv": 480,
+            "csv_fuel_prices.csv": 240,
+            "xlsx_service_retention.xlsx": 24
+        },
+        "ecommerce": {
+            "sql_customer_metrics.csv": 60,
+            "sql_orders.csv": 4508,
+            "sql_products.csv": 120,
+            "sql_regional_sales.csv": 240,
+            "xlsx_abandoned_cart.xlsx": 240,
+            "csv_campaign_ctr.csv": 180,
+            "csv_shipping_costs.csv": 240
+        }
+    },
+    "missingness_summary": {
+        "marketing_spend_ctr": 7,
+        "critic_reviews_sentiment": 4,
+        "regional_engagement_score": 110,
+        "dealership_sales_growth": 17,
+        "ad_spend_conversion": 9,
+        "campaign_ctr_ctr": 2,
+        "abandoned_cart_rate": 1
+    },
+    "detected_anomalies": [
+        {
+            "domain": "movies",
+            "month": "2021-07",
+            "type": "unusually_high_churn_month",
+            "description": "Subscriber churn rose anomalously by 61.6% due to transient server outage or localized billing error."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-06",
+            "movie_id": "M216",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Solitude'."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-07",
+            "movie_id": "M108",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Parallel Singularity'."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-08",
+            "movie_id": "M142",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Mercenary Run' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-09",
+            "movie_id": "M139",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Safehouse'."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-09",
+            "movie_id": "M196",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Ethereal Connection' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-01",
+            "movie_id": "M170",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Hilarious Heist' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-01",
+            "movie_id": "M178",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Summer Love Letters' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-02",
+            "movie_id": "M123",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Singularity'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-03",
+            "movie_id": "M104",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Project Kepler' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-03",
+            "movie_id": "M153",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Office Shenanigans'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-04",
+            "movie_id": "M102",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Starlight Odyssey' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-04",
+            "movie_id": "M216",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Solitude' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-05",
+            "movie_id": "M138",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Gridlock'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-05",
+            "movie_id": "M175",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Comedy of Errors'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-06",
+            "movie_id": "M123",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'The Singularity' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-06",
+            "movie_id": "M130",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Iron Fist' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-06",
+            "movie_id": "M157",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Total Flop'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-07",
+            "movie_id": "M148",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Rapid Fire'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-08",
+            "movie_id": "M149",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Counter-Strike'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-09",
+            "movie_id": "M201",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Shattered Glass'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-09",
+            "movie_id": "M220",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Last Chapter'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-10",
+            "movie_id": "M114",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Aegis Engine'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-10",
+            "movie_id": "M191",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Coincidence'."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-10",
+            "movie_id": "M205",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'The Long Road Home' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-12",
+            "movie_id": "M155",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'The Great Escapade' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2020-12",
+            "movie_id": "M162",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Camp Chaos'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-03",
+            "movie_id": "M220",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Last Chapter'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-04",
+            "movie_id": "M192",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'The Last Dance' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-04",
+            "movie_id": "M200",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Destined Paths'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-04",
+            "movie_id": "M202",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Silent Witness'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-05",
+            "movie_id": "M142",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Mercenary Run' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-05",
+            "movie_id": "M171",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Silly Business'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-06",
+            "movie_id": "M112",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Binary Eclipse'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-06",
+            "movie_id": "M222",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Beneath the Surface'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-08",
+            "movie_id": "M112",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Binary Eclipse'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-08",
+            "movie_id": "M198",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Sweethearts' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-09",
+            "movie_id": "M107",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Interstellar Drift' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-09",
+            "movie_id": "M199",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'True Melodies'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-10",
+            "movie_id": "M114",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Aegis Engine'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-10",
+            "movie_id": "M184",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Heartbeats'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-11",
+            "movie_id": "M116",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Omega Sector' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-11",
+            "movie_id": "M138",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Gridlock'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-11",
+            "movie_id": "M225",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Final Verdict'."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-12",
+            "movie_id": "M197",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Cupid's Arrow'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-01",
+            "movie_id": "M182",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Rendezvous' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-01",
+            "movie_id": "M197",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Cupid's Arrow'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-03",
+            "movie_id": "M105",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Neon Grid'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-03",
+            "movie_id": "M160",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Corporate Clowns'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-04",
+            "movie_id": "M109",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Void Horizon'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-04",
+            "movie_id": "M117",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Solar Wind' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-05",
+            "movie_id": "M116",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Omega Sector' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-05",
+            "movie_id": "M153",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Office Shenanigans'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-05",
+            "movie_id": "M179",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Sketches of You'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-06",
+            "movie_id": "M143",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Final Stand'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-06",
+            "movie_id": "M179",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Sketches of You'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-07",
+            "movie_id": "M156",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Bizarre Bazaar' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-07",
+            "movie_id": "M175",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Comedy of Errors'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-07",
+            "movie_id": "M176",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Midnight Coffee' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-07",
+            "movie_id": "M210",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Tears of Silver'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-08",
+            "movie_id": "M105",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Neon Grid'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-08",
+            "movie_id": "M207",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'A Father's Shadow' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-09",
+            "movie_id": "M128",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Velocity Zero'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-09",
+            "movie_id": "M146",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Black Ops' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-09",
+            "movie_id": "M213",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Legacy'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-10",
+            "movie_id": "M192",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Last Dance'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-10",
+            "movie_id": "M193",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Dear Diary'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-10",
+            "movie_id": "M211",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Broken Promises'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-11",
+            "movie_id": "M115",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Gravity Well'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-11",
+            "movie_id": "M156",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Bizarre Bazaar' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-11",
+            "movie_id": "M225",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Final Verdict'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-12",
+            "movie_id": "M195",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'A Crimson Rose'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-01",
+            "movie_id": "M112",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Binary Eclipse'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-01",
+            "movie_id": "M185",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'The Canvas of Love'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-02",
+            "movie_id": "M137",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Reckoning Day' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-02",
+            "movie_id": "M219",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Chasing Dreams' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-03",
+            "movie_id": "M124",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Nanite'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-04",
+            "movie_id": "M132",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Rogue Vanguard'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-06",
+            "movie_id": "M150",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Close Quarters' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-06",
+            "movie_id": "M199",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'True Melodies' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-07",
+            "movie_id": "M191",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'Coincidence' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-08",
+            "movie_id": "M213",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Legacy'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-09",
+            "movie_id": "M195",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'A Crimson Rose'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-10",
+            "movie_id": "M122",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Quantum Leap'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-10",
+            "movie_id": "M144",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Steel Rain'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-10",
+            "movie_id": "M210",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Tears of Silver'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-11",
+            "movie_id": "M147",
+            "type": "platform_outage_crash",
+            "description": "Transient engagement crash on 'High Tension' associated with regional platform delivery failures."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-12",
+            "movie_id": "M147",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'High Tension'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-12",
+            "movie_id": "M163",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Lost in Translation'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-12",
+            "movie_id": "M189",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Chasing Horizons'."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-12",
+            "movie_id": "M218",
+            "type": "unexpected_viral_hit",
+            "description": "Unexpected viral organic growth spike observed for movie 'Stolen Moments'."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-12",
+            "movie_id": "M101",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Cybernetic Dawn', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-03",
+            "movie_id": "M102",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Starlight Odyssey', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-07",
+            "movie_id": "M111",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Carbon Copy', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-10",
+            "movie_id": "M113",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Synthetic Souls', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-04",
+            "movie_id": "M116",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Omega Sector', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-07",
+            "movie_id": "M129",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Redline Fury', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-02",
+            "movie_id": "M148",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Rapid Fire', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-12",
+            "movie_id": "M156",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Bizarre Bazaar', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2023-05",
+            "movie_id": "M168",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Prank Wars', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2022-08",
+            "movie_id": "M169",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'The Gaffe', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2019-01",
+            "movie_id": "M170",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'Hilarious Heist', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "movies",
+            "month": "2021-06",
+            "movie_id": "M225",
+            "type": "failed_marketing_campaign",
+            "description": "Ad campaign failed anomalously for 'The Final Verdict', with high ad spend yielding exceptionally weak CTR."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-10",
+            "region": "West",
+            "type": "financing_freeze",
+            "description": "Automotive financing approval rate dipped anomalously in West due to a localized bank underwriting delay."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-02",
+            "model_id": "C1021",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-09",
+            "model_id": "C1089",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Zenith'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-11",
+            "model_id": "C1030",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-12",
+            "model_id": "C1008",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'ApexMotors' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-01",
+            "model_id": "C1080",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Zenith' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-01",
+            "model_id": "C1086",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Zenith'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-01",
+            "model_id": "C1094",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Ascent'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-02",
+            "model_id": "C1090",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Ascent' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-02",
+            "model_id": "C1095",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Ascent' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-04",
+            "model_id": "C1072",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'OmniCar'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-09",
+            "model_id": "C1081",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Zenith'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-10",
+            "model_id": "C1051",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Stratos' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-11",
+            "model_id": "C1035",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-11",
+            "model_id": "C1086",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Zenith' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-11",
+            "model_id": "C1101",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Ascent' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-01",
+            "model_id": "C1057",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Stratos'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-02",
+            "model_id": "C1062",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Stratos'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-03",
+            "model_id": "C1024",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-03",
+            "model_id": "C1081",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Zenith'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-05",
+            "model_id": "C1026",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-07",
+            "model_id": "C1008",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'ApexMotors' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-09",
+            "model_id": "C1039",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'TerraAuto'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-10",
+            "model_id": "C1008",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'ApexMotors'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-10",
+            "model_id": "C1053",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Stratos' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-10",
+            "model_id": "C1069",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'OmniCar' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-10",
+            "model_id": "C1072",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'OmniCar' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-11",
+            "model_id": "C1040",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'TerraAuto' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-01",
+            "model_id": "C1011",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'ApexMotors' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-02",
+            "model_id": "C1071",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'OmniCar' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-03",
+            "model_id": "C1049",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'TerraAuto'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-03",
+            "model_id": "C1069",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'OmniCar' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-03",
+            "model_id": "C1094",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Ascent'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-03",
+            "model_id": "C1097",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Ascent' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-04",
+            "model_id": "C1011",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'ApexMotors'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-04",
+            "model_id": "C1059",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Stratos' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-05",
+            "model_id": "C1023",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-06",
+            "model_id": "C1016",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-06",
+            "model_id": "C1039",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'TerraAuto'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-06",
+            "model_id": "C1081",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Zenith'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-06",
+            "model_id": "C1088",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Zenith' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-07",
+            "model_id": "C1023",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-07",
+            "model_id": "C1036",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Luxus'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-07",
+            "model_id": "C1089",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Zenith' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-08",
+            "model_id": "C1022",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-08",
+            "model_id": "C1033",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-09",
+            "model_id": "C1031",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-10",
+            "model_id": "C1020",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-10",
+            "model_id": "C1021",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-11",
+            "model_id": "C1020",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-11",
+            "model_id": "C1022",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-12",
+            "model_id": "C1031",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-12",
+            "model_id": "C1078",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Zenith' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-01",
+            "model_id": "C1031",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Luxus'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-01",
+            "model_id": "C1093",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Ascent'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-02",
+            "model_id": "C1031",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-02",
+            "model_id": "C1043",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'TerraAuto' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-02",
+            "model_id": "C1053",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Stratos' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-02",
+            "model_id": "C1090",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Ascent' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-03",
+            "model_id": "C1011",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'ApexMotors'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-03",
+            "model_id": "C1039",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'TerraAuto'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-05",
+            "model_id": "C1027",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Luxus' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-06",
+            "model_id": "C1025",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-06",
+            "model_id": "C1051",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Stratos' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-06",
+            "model_id": "C1066",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'OmniCar' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-07",
+            "model_id": "C1016",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-07",
+            "model_id": "C1020",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-07",
+            "model_id": "C1021",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Voltaic'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-07",
+            "model_id": "C1044",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'TerraAuto' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-08",
+            "model_id": "C1023",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Voltaic' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-08",
+            "model_id": "C1036",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'Luxus'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-08",
+            "model_id": "C1064",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'OmniCar' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-09",
+            "model_id": "C1088",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Zenith' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-10",
+            "model_id": "C1003",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'ApexMotors' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-10",
+            "model_id": "C1007",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'ApexMotors' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-10",
+            "model_id": "C1049",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'TerraAuto'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-10",
+            "model_id": "C1052",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'Stratos' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-12",
+            "model_id": "C1002",
+            "type": "inventory_or_recall_dip",
+            "description": "Sales dipped for 'ApexMotors' due to a transient microchip supplier delay or recall campaign."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-12",
+            "model_id": "C1074",
+            "type": "sudden_ev_demand_spike",
+            "description": "A surge in regional clean energy awareness caused an unexpected EV demand spike on 'OmniCar'."
+        },
+        {
+            "domain": "automotive",
+            "month": "2022-12",
+            "dealership_id": "D102",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D102 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-04",
+            "dealership_id": "D104",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D104 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-05",
+            "dealership_id": "D107",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D107 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-10",
+            "dealership_id": "D108",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D108 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-12",
+            "dealership_id": "D110",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D110 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2023-10",
+            "dealership_id": "D110",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D110 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2020-10",
+            "dealership_id": "D111",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D111 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-03",
+            "dealership_id": "D111",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D111 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-03",
+            "dealership_id": "D113",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D113 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-07",
+            "dealership_id": "D114",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D114 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2019-09",
+            "dealership_id": "D115",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D115 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "automotive",
+            "month": "2021-04",
+            "dealership_id": "D115",
+            "type": "dealership_closure_or_outage",
+            "description": "Dealership D115 footfall dropped due to temporary road closures or building renovations."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-01",
+            "product_id": "P5043",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5043' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-02",
+            "product_id": "P5091",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5091' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-03",
+            "product_id": "P5091",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5091' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-05",
+            "product_id": "P5042",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5042' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-06",
+            "product_id": "P5002",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5002' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-06",
+            "product_id": "P5077",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5077' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-06",
+            "product_id": "P5091",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5091'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-07",
+            "product_id": "P5061",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5061' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-07",
+            "product_id": "P5106",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5106'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-08",
+            "product_id": "P5051",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5051' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-08",
+            "product_id": "P5091",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5091'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-09",
+            "product_id": "P5042",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5042' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-09",
+            "product_id": "P5086",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5086' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-09",
+            "product_id": "P5097",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5097'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-11",
+            "product_id": "P5041",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5041' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-11",
+            "product_id": "P5063",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5063'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-12",
+            "product_id": "P5045",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5045'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-12",
+            "product_id": "P5089",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5089'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-01",
+            "product_id": "P5007",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5007'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-01",
+            "product_id": "P5118",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5118'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-02",
+            "product_id": "P5051",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5051'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-03",
+            "product_id": "P5081",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5081'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-04",
+            "product_id": "P5045",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5045' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-05",
+            "product_id": "P5031",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5031'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-06",
+            "product_id": "P5024",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5024' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-07",
+            "product_id": "P5001",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5001'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-07",
+            "product_id": "P5098",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5098' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-07",
+            "product_id": "P5118",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5118' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-09",
+            "product_id": "P5020",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5020'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-09",
+            "product_id": "P5052",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5052'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-09",
+            "product_id": "P5089",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5089' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-10",
+            "product_id": "P5031",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5031' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-10",
+            "product_id": "P5091",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5091' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-11",
+            "product_id": "P5028",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5028' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-11",
+            "product_id": "P5031",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5031' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-11",
+            "product_id": "P5051",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5051'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-12",
+            "product_id": "P5001",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5001'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-12",
+            "product_id": "P5065",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5065' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-01",
+            "product_id": "P5012",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5012' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-02",
+            "product_id": "P5011",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5011'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-03",
+            "product_id": "P5119",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5119'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-05",
+            "product_id": "P5007",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5007' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-05",
+            "product_id": "P5033",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5033' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-05",
+            "product_id": "P5099",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5099' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-05",
+            "product_id": "P5100",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5100' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-06",
+            "product_id": "P5066",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5066' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-06",
+            "product_id": "P5088",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5088' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-07",
+            "product_id": "P5017",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5017'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-07",
+            "product_id": "P5060",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5060'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-08",
+            "product_id": "P5066",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5066'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-08",
+            "product_id": "P5119",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5119' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-09",
+            "product_id": "P5040",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5040'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-09",
+            "product_id": "P5108",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5108' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-10",
+            "product_id": "P5014",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5014' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-10",
+            "product_id": "P5024",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5024'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-10",
+            "product_id": "P5032",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5032'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-10",
+            "product_id": "P5056",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5056' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-10",
+            "product_id": "P5082",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5082'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-11",
+            "product_id": "P5021",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5021' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-11",
+            "product_id": "P5055",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5055'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-12",
+            "product_id": "P5059",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5059'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-01",
+            "product_id": "P5010",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5010'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-02",
+            "product_id": "P5001",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5001' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-02",
+            "product_id": "P5024",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5024' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-02",
+            "product_id": "P5041",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5041'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-03",
+            "product_id": "P5073",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5073'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-04",
+            "product_id": "P5025",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5025'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-04",
+            "product_id": "P5085",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5085' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-05",
+            "product_id": "P5105",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5105' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-06",
+            "product_id": "P5017",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5017' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-06",
+            "product_id": "P5019",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5019' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-06",
+            "product_id": "P5038",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5038' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-06",
+            "product_id": "P5090",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5090' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5014",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5014'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5017",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5017'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5019",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5019'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5032",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5032'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5054",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5054' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5085",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5085' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-07",
+            "product_id": "P5088",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5088' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-08",
+            "product_id": "P5011",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5011' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-08",
+            "product_id": "P5051",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5051' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-08",
+            "product_id": "P5060",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5060' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-08",
+            "product_id": "P5100",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5100'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-09",
+            "product_id": "P5033",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5033' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-09",
+            "product_id": "P5054",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5054' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-09",
+            "product_id": "P5075",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5075'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-11",
+            "product_id": "P5092",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5092' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-12",
+            "product_id": "P5029",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5029' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-12",
+            "product_id": "P5047",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5047'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-12",
+            "product_id": "P5054",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5054' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-02",
+            "product_id": "P5002",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5002'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-02",
+            "product_id": "P5031",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5031'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-03",
+            "product_id": "P5009",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5009' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-03",
+            "product_id": "P5093",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5093'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-03",
+            "product_id": "P5120",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5120'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-04",
+            "product_id": "P5069",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5069'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-05",
+            "product_id": "P5001",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5001'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-05",
+            "product_id": "P5031",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5031' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-05",
+            "product_id": "P5037",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5037' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-05",
+            "product_id": "P5062",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5062' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-06",
+            "product_id": "P5002",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5002'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-06",
+            "product_id": "P5034",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5034' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-07",
+            "product_id": "P5033",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5033' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-08",
+            "product_id": "P5001",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5001'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-08",
+            "product_id": "P5029",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5029'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-08",
+            "product_id": "P5033",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5033' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-08",
+            "product_id": "P5112",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5112'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-08",
+            "product_id": "P5114",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5114' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-09",
+            "product_id": "P5025",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5025'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-09",
+            "product_id": "P5028",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5028' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-09",
+            "product_id": "P5051",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5051' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-09",
+            "product_id": "P5100",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5100' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-10",
+            "product_id": "P5027",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5027' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-11",
+            "product_id": "P5027",
+            "type": "checkout_system_outage",
+            "description": "Checkout payment gateway outage impacted conversion rates for product 'P5027'."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-11",
+            "product_id": "P5072",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5072' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2023-12",
+            "product_id": "P5072",
+            "type": "viral_product_surge",
+            "description": "Viral social media surge observed for product 'P5072' boosting orders."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-01",
+            "region": "West",
+            "type": "shipping_logistics_disruption",
+            "description": "Suez Canal or regional port bottlenecks anomalously inflated shipping rates in West region."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-01",
+            "region": "West",
+            "type": "shipping_logistics_disruption",
+            "description": "Suez Canal or regional port bottlenecks anomalously inflated shipping rates in West region."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-12",
+            "region": "South",
+            "type": "shipping_logistics_disruption",
+            "description": "Suez Canal or regional port bottlenecks anomalously inflated shipping rates in South region."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2019-04",
+            "campaign_id": "CAMP_2019_6",
+            "type": "campaign_underperformance",
+            "description": "Campaign 'CAMP_2019_6' observed severe underperformance due to localized ad delivery issues."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2020-06",
+            "campaign_id": "CAMP_2020_6",
+            "type": "campaign_underperformance",
+            "description": "Campaign 'CAMP_2020_6' observed severe underperformance due to localized ad delivery issues."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2021-06",
+            "campaign_id": "CAMP_2021_6",
+            "type": "campaign_underperformance",
+            "description": "Campaign 'CAMP_2021_6' observed severe underperformance due to localized ad delivery issues."
+        },
+        {
+            "domain": "ecommerce",
+            "month": "2022-03",
+            "campaign_id": "CAMP_2022_3",
+            "type": "campaign_underperformance",
+            "description": "Campaign 'CAMP_2022_3' observed severe underperformance due to localized ad delivery issues."
+        }
+    ],
+    "trend_confirmations": [
+        "Movies: 2022-Q1 subscriber price increase followed by Comedy-related churn rise confirmed.",
+        "Automotive: 2022 fuel spike correlates with significant EV units sold increase.",
+        "E-Commerce: Shipping costs spike correlates with cart abandonment surge (except in North region)."
+    ]
+}

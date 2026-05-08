@@ -1,0 +1,12 @@
+sentence-transformers
+faiss-cpu
+fastapi[standard]
+uvicorn
+pandas
+SQLAlchemy
+psycopg2-binary
+motor
+python-dotenv
+pdfplumber
+openai
+openpyxl

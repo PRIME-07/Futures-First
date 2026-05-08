@@ -1,0 +1,121 @@
+product_id,category,launch_date,discontinuation_date,supplier_region
+P5001,Electronics,2018-10-01,,Asia-Pacific
+P5002,Electronics,2018-12-01,,North America
+P5003,Electronics,2017-02-01,2019-12-31,Latin America
+P5004,Electronics,2022-10-01,,Latin America
+P5005,Electronics,2021-06-01,,Europe
+P5006,Electronics,2023-10-01,,Latin America
+P5007,Electronics,2019-11-01,2023-12-31,Asia-Pacific
+P5008,Electronics,2020-08-01,,Asia-Pacific
+P5009,Electronics,2017-03-01,,Asia-Pacific
+P5010,Electronics,2019-10-01,,North America
+P5011,Electronics,2021-01-01,,North America
+P5012,Electronics,2017-07-01,,Asia-Pacific
+P5013,Electronics,2020-08-01,,Asia-Pacific
+P5014,Electronics,2018-12-01,2022-12-31,North America
+P5015,Electronics,2023-11-01,,Asia-Pacific
+P5016,Electronics,2023-08-01,,North America
+P5017,Electronics,2019-01-01,2022-12-31,Latin America
+P5018,Electronics,2022-03-01,,Europe
+P5019,Electronics,2022-01-01,,North America
+P5020,Electronics,2017-01-01,,Europe
+P5021,Electronics,2021-04-01,,Asia-Pacific
+P5022,Electronics,2022-07-01,,Asia-Pacific
+P5023,Electronics,2023-09-01,,Europe
+P5024,Electronics,2018-09-01,,Asia-Pacific
+P5025,Apparel,2018-06-01,,Europe
+P5026,Apparel,2023-02-01,,Asia-Pacific
+P5027,Apparel,2021-08-01,,North America
+P5028,Apparel,2020-05-01,,North America
+P5029,Apparel,2021-04-01,,North America
+P5030,Apparel,2023-02-01,,Latin America
+P5031,Apparel,2019-07-01,,North America
+P5032,Apparel,2020-04-01,,Asia-Pacific
+P5033,Apparel,2017-06-01,,Latin America
+P5034,Apparel,2022-10-01,,Europe
+P5035,Apparel,2022-06-01,,Europe
+P5036,Apparel,2021-11-01,,Asia-Pacific
+P5037,Apparel,2022-08-01,,Asia-Pacific
+P5038,Apparel,2021-09-01,,Europe
+P5039,Apparel,2019-08-01,,Europe
+P5040,Apparel,2017-12-01,,North America
+P5041,Apparel,2019-04-01,2022-12-31,Europe
+P5042,Apparel,2017-11-01,2019-12-31,Latin America
+P5043,Apparel,2018-10-01,2020-12-31,Europe
+P5044,Apparel,2019-12-01,,Latin America
+P5045,Apparel,2019-02-01,,Latin America
+P5046,Apparel,2017-12-01,,North America
+P5047,Apparel,2020-08-01,,Asia-Pacific
+P5048,Apparel,2023-06-01,,Europe
+P5049,Home & Kitchen,2018-06-01,,Asia-Pacific
+P5050,Home & Kitchen,2020-11-01,,Asia-Pacific
+P5051,Home & Kitchen,2018-08-01,,Latin America
+P5052,Home & Kitchen,2018-02-01,,Latin America
+P5053,Home & Kitchen,2022-09-01,,Latin America
+P5054,Home & Kitchen,2022-03-01,,Latin America
+P5055,Home & Kitchen,2021-03-01,,Latin America
+P5056,Home & Kitchen,2019-01-01,2023-12-31,North America
+P5057,Home & Kitchen,2017-12-01,2019-12-31,Europe
+P5058,Home & Kitchen,2023-05-01,,North America
+P5059,Home & Kitchen,2020-07-01,,North America
+P5060,Home & Kitchen,2019-04-01,,Latin America
+P5061,Home & Kitchen,2017-09-01,,North America
+P5062,Home & Kitchen,2023-04-01,,Europe
+P5063,Home & Kitchen,2018-01-01,2021-12-31,Europe
+P5064,Home & Kitchen,2021-06-01,,North America
+P5065,Home & Kitchen,2018-04-01,,North America
+P5066,Home & Kitchen,2017-06-01,,Asia-Pacific
+P5067,Home & Kitchen,2017-06-01,,Europe
+P5068,Home & Kitchen,2017-11-01,,Latin America
+P5069,Home & Kitchen,2023-03-01,,North America
+P5070,Home & Kitchen,2021-02-01,,Asia-Pacific
+P5071,Home & Kitchen,2022-09-01,,Asia-Pacific
+P5072,Home & Kitchen,2021-12-01,,Latin America
+P5073,Beauty,2017-09-01,,Europe
+P5074,Beauty,2017-01-01,,North America
+P5075,Beauty,2021-09-01,,Asia-Pacific
+P5076,Beauty,2017-12-01,,North America
+P5077,Beauty,2017-04-01,,Latin America
+P5078,Beauty,2017-04-01,2020-12-31,Latin America
+P5079,Beauty,2023-02-01,,North America
+P5080,Beauty,2020-10-01,,Asia-Pacific
+P5081,Beauty,2020-03-01,,Asia-Pacific
+P5082,Beauty,2020-10-01,,North America
+P5083,Beauty,2022-05-01,,Europe
+P5084,Beauty,2023-07-01,,Latin America
+P5085,Beauty,2021-01-01,,Asia-Pacific
+P5086,Beauty,2017-03-01,2021-12-31,North America
+P5087,Beauty,2020-10-01,,Asia-Pacific
+P5088,Beauty,2019-05-01,,Asia-Pacific
+P5089,Beauty,2017-08-01,,Asia-Pacific
+P5090,Beauty,2021-05-01,,North America
+P5091,Beauty,2018-06-01,,North America
+P5092,Beauty,2017-03-01,,North America
+P5093,Beauty,2022-01-01,,Europe
+P5094,Beauty,2023-10-01,,Latin America
+P5095,Beauty,2021-01-01,,Europe
+P5096,Beauty,2019-01-01,2022-12-31,North America
+P5097,Sports,2017-02-01,2019-12-31,Latin America
+P5098,Sports,2020-01-01,,Europe
+P5099,Sports,2017-03-01,,Asia-Pacific
+P5100,Sports,2020-06-01,,North America
+P5101,Sports,2019-04-01,,Europe
+P5102,Sports,2022-03-01,,North America
+P5103,Sports,2020-06-01,,North America
+P5104,Sports,2023-08-01,,Europe
+P5105,Sports,2019-09-01,,Asia-Pacific
+P5106,Sports,2018-11-01,,Latin America
+P5107,Sports,2023-05-01,,North America
+P5108,Sports,2019-10-01,2023-12-31,Europe
+P5109,Sports,2023-10-01,,Latin America
+P5110,Sports,2017-09-01,,Latin America
+P5111,Sports,2019-11-01,,Europe
+P5112,Sports,2019-12-01,,North America
+P5113,Sports,2023-10-01,,North America
+P5114,Sports,2022-01-01,,Asia-Pacific
+P5115,Sports,2020-02-01,,North America
+P5116,Sports,2020-10-01,,North America
+P5117,Sports,2019-03-01,,Asia-Pacific
+P5118,Sports,2017-06-01,,Asia-Pacific
+P5119,Sports,2020-02-01,,Latin America
+P5120,Sports,2021-10-01,,North America
