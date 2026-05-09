@@ -19,9 +19,8 @@ flowchart TD
     end
 
     subgraph FastAPI Ingestion Routing
-        CSV_Route[POST /ingest/dataset]
-        PDF_Route[POST /ingest/pdf]
-        DB_Route[POST /ingest/connect]
+        File_Route[POST /ingest/]
+        DB_Route[POST /ingest/connect_db]
     end
 
     subgraph Secure Storage Engines
@@ -30,14 +29,14 @@ flowchart TD
         Mongo[(MongoDB Registry)]
     end
 
-    CSV -->|Optional dataset_name fallback| CSV_Route
-    PDF -->|Automated parsing| PDF_Route
+    CSV -->|Optional dataset_name fallback| File_Route
+    PDF -->|Automated parsing| File_Route
     DB_Creds -->|Credentials parsing| DB_Route
 
-    CSV_Route -->|Upload to session-scoped table| PG
-    CSV_Route -->|Register metadata| Mongo
-    PDF_Route -->|Index text with PyTorch SentenceTransformers| VectorDB
-    PDF_Route -->|Register page indexes| Mongo
+    File_Route -->|Upload to session-scoped table| PG
+    File_Route -->|Register metadata| Mongo
+    File_Route -->|Index text with PyTorch SentenceTransformers| VectorDB
+    File_Route -->|Register page indexes| Mongo
     DB_Route -->|Store credentials securely| Mongo
 ```
 
@@ -124,30 +123,63 @@ curl http://localhost:8000/health
 ## 📥 Ingestion & Databases Guide
 
 ### Structured SQL Databases
-We host 3 pre-configured relational databases with persistent volumes. To connect to them in a session, use the **Add Data Source** form in the frontend sidebar, or send a `POST /ingest/connect_db` request with the following parameters:
+We host 3 pre-configured relational databases with persistent volumes. 
 
-#### 1. Movies Database (PostgreSQL)
-*   **Host**: `postgres_movies`
-*   **Port**: `5432`
-*   **Database**: `movies_db`
-*   **User / Password**: `movie_user` / `movie_password`
-*   **Internal connection string**: `postgresql://movie_user:movie_password@postgres_movies:5432/movies_db`
+> [!IMPORTANT]
+> **Docker Network Hostname Warning:**
+> Since both the FastAPI backend (`api` container) and database servers run inside the Docker network, **you must use the internal Docker container names as the "Host" and internal ports (e.g. `5432` or `3306`) in the frontend UI** rather than `localhost`. 
+> 
+> Using `localhost` will result in a `Connection refused` error because the backend container will try to connect to itself instead of the database container!
 
-#### 2. Automotive Database (PostgreSQL)
-*   **Host**: `postgres_automotive`
-*   **Port**: `5432`
-*   **Database**: `automotive_db`
-*   **User / Password**: `automotive_user` / `automotive_password`
-*   **Internal connection string**: `postgresql://automotive_user:automotive_password@postgres_automotive:5432/automotive_db`
+To connect to these databases in a session, use the **Add Data Source** form in the frontend sidebar, or send a `POST /ingest/connect_db` request with the following parameters:
 
-#### 3. E-Commerce Database (MySQL)
-*   **Host**: `mysql_ecommerce`
-*   **Port**: `3306`
-*   **Database**: `ecommerce_db`
-*   **User / Password**: `ecommerce_user` / `ecommerce_password`
-*   **Internal connection string**: `mysql+pymysql://ecommerce_user:ecommerce_password@mysql_ecommerce:3306/ecommerce_db`
+#### 🎬 1. Movies Database (PostgreSQL)
+* **Option A: External (Local Machine / GUI / Local Backend Host)**
+  * **Source Type**: `PostgreSQL Database`
+  * **Host**: `localhost`
+  * **Port**: `5433`
+  * **Database Name**: `movies_db`
+  * **Username**: `movie_user`
+  * **Password**: `movie_password`
+* **Option B: Internal (Docker Network Context)**
+  * **Source Type**: `PostgreSQL Database`
+  * **Host**: `postgres_movies`
+  * **Port**: `5432`
+  * **Database Name**: `movies_db`
+  * **Username**: `movie_user`
+  * **Password**: `movie_password`
 
-*Note: Port mappings on your local localhost are slightly shifted (e.g., `5433`, `5434`, `3307`) to prevent local driver conflicts. If connecting from an external tool like DBeaver, use those ports.*
+#### 🚗 2. Automotive Database (PostgreSQL)
+* **Option A: External (Local Machine / GUI / Local Backend Host)**
+  * **Source Type**: `PostgreSQL Database`
+  * **Host**: `localhost`
+  * **Port**: `5434`
+  * **Database Name**: `automotive_db`
+  * **Username**: `automotive_user`
+  * **Password**: `automotive_password`
+* **Option B: Internal (Docker Network Context)**
+  * **Source Type**: `PostgreSQL Database`
+  * **Host**: `postgres_automotive`
+  * **Port**: `5432`
+  * **Database Name**: `automotive_db`
+  * **Username**: `automotive_user`
+  * **Password**: `automotive_password`
+
+#### 🛒 3. Ecommerce Database (MySQL)
+* **Option A: External (Local Machine / GUI / Local Backend Host)**
+  * **Source Type**: `MySQL Database`
+  * **Host**: `localhost`
+  * **Port**: `3307`
+  * **Database Name**: `ecommerce_db`
+  * **Username**: `ecommerce_user`
+  * **Password**: `ecommerce_password`
+* **Option B: Internal (Docker Network Context)**
+  * **Source Type**: `MySQL Database`
+  * **Host**: `mysql_ecommerce`
+  * **Port**: `3306`
+  * **Database Name**: `ecommerce_db`
+  * **Username**: `ecommerce_user`
+  * **Password**: `ecommerce_password`
 
 ---
 
@@ -156,8 +188,8 @@ We host 3 pre-configured relational databases with persistent volumes. To connec
 Here is a typical flow of how to use **Insight Monkey** to analyze data from scratch:
 
 ### 1. Start a Session & Upload Documents
-1. Open the UI or trigger `POST /ingest/dataset` with a CSV or Excel spreadsheet (such as `marketing_spend.csv` or `regional_performance.csv`).
-2. Upload unstructured PDFs via `POST /ingest/pdf` (such as `quarterly_report.pdf`).
+1. Open the UI or trigger `POST /ingest/` with a CSV or Excel spreadsheet (such as `marketing_spend.csv` or `regional_performance.csv`).
+2. Upload unstructured PDFs via the same unified `POST /ingest/` endpoint (such as `quarterly_report.pdf`).
 3. View all loaded files and registries by querying `GET /ingest/sessions/{session_id}/sources`.
 
 ### 2. Connect Your SQL Databases
