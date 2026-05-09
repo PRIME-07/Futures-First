@@ -2,3 +2,13 @@
 project_req/
 __pycache__/
 *.pyc
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/src/assets/Logo.jpg
+frontend/src/assets/favicon.jpg
+frontend/public/Logo.jpg
+frontend/public/favicon.jpg
+
+assignment.md

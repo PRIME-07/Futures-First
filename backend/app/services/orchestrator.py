@@ -30,13 +30,51 @@ async def get_session_schema_context(session_id: str) -> str:
         
     context = "Available Datasets:\n"
     for ds in datasets:
-        context += f"- original_filename: {ds.get('filename')}\n"
+        source_type = ds.get("source_type", "uploaded")
+        source_label = "[External DB]" if source_type == "database" else "[Uploaded File]"
+        display_name = ds.get("original_filename") or ds.get("dataset_name", "unknown")
+        context += f"- {source_label} {display_name}\n"
         context += f"  dataset_uuid: {ds.get('dataset_uuid')}\n"
         semantics = ds.get("semantic_mapping", {})
         columns = list(semantics.keys()) if semantics else ds.get("columns", [])
         context += f"  Columns (Enum): {columns}\n"
         context += f"  Columns and roles: {json.dumps(semantics)}\n"
     return context
+
+async def fetch_chat_history_with_token_limit(session_id: str, max_tokens: int = 500) -> List[Dict[str, str]]:
+    try:
+        import tiktoken
+        encoding = tiktoken.encoding_for_model("gpt-4o")
+    except Exception:
+        encoding = None
+
+    db = get_mongo_db()
+    cursor = db.chats.find({"session_id": session_id}).sort("timestamp", -1).limit(15)
+    chats = await cursor.to_list(length=None)
+    
+    formatted_messages = []
+    current_tokens = 0
+    
+    for chat in chats:
+        u_text = chat.get("query", "")
+        a_text = chat.get("answer", "")
+        if not u_text or not a_text:
+            continue
+            
+        exchange_text = f"user\n{u_text}\nassistant\n{a_text}\n"
+        if encoding:
+            tokens_count = len(encoding.encode(exchange_text))
+        else:
+            tokens_count = len(exchange_text) // 4
+            
+        if current_tokens + tokens_count > max_tokens:
+            break
+            
+        current_tokens += tokens_count
+        formatted_messages.insert(0, {"role": "assistant", "content": a_text})
+        formatted_messages.insert(0, {"role": "user", "content": u_text})
+        
+    return formatted_messages
 
 async def classify_intent_and_extract_parameters(query: str, session_id: str, on_retry=None) -> Dict[str, Any]:
     schema_context = await get_session_schema_context(session_id)
@@ -75,10 +113,10 @@ REQUIRED PARAMETERS FOR EACH INTENT:
 Note: For pandas_outliers and sql_aggregate/rolling_average 'metric' or 'target_col', ensure the column role is "metric".
 """
 
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": query}
-    ]
+    history = await fetch_chat_history_with_token_limit(session_id, max_tokens=500)
+    messages = [{"role": "system", "content": system_prompt}]
+    messages.extend(history)
+    messages.append({"role": "user", "content": query})
 
     max_retries = 2
     for attempt in range(max_retries + 1):

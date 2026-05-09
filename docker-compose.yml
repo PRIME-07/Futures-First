@@ -19,6 +19,40 @@ services:
     ports:
       - "27017:27017"
 
+  postgres_movies:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: movies_db
+      POSTGRES_USER: movie_user
+      POSTGRES_PASSWORD: movie_password
+    volumes:
+      - postgres_movies_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"
+
+  postgres_automotive:
+    image: postgres:15
+    environment:
+      POSTGRES_DB: automotive_db
+      POSTGRES_USER: automotive_user
+      POSTGRES_PASSWORD: automotive_password
+    volumes:
+      - postgres_automotive_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  mysql_ecommerce:
+    image: mysql:8.0
+    environment:
+      MYSQL_DATABASE: ecommerce_db
+      MYSQL_USER: ecommerce_user
+      MYSQL_PASSWORD: ecommerce_password
+      MYSQL_ROOT_PASSWORD: ecommerce_root_password
+    volumes:
+      - mysql_ecommerce_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+
   api:
     build: 
       context: .
@@ -27,9 +61,13 @@ services:
       - "8000:8000"
     volumes:
       - ./backend:/app
+      - ./data:/app/data
     depends_on:
       - postgres
       - mongodb
+      - postgres_movies
+      - postgres_automotive
+      - mysql_ecommerce
     environment:
       # Override local URLs with container hostnames
       POSTGRES_URL: "postgresql://user:password@postgres:5432/analytics_db"
@@ -42,3 +80,6 @@ services:
 volumes:
   postgres_data:
   mongo_data:
+  postgres_movies_data:
+  postgres_automotive_data:
+  mysql_ecommerce_data:

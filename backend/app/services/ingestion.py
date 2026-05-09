@@ -85,7 +85,7 @@ async def process_csv_ingestion(file_content: bytes, filename: str, dataset_name
         "columns": list(df.columns),
         "semantic_mapping": semantics,
         "capabilities": capabilities,
-        "created_at": datetime.utcnow()
+        "created_at": datetime.now()
     }
     
     await mongo_db.dataset_registry.insert_one(registry_entry)
@@ -122,7 +122,7 @@ async def process_pdf_ingestion(file_content: bytes, filename: str, session_id: 
         "content_length": len(full_text),
         "raw_text": full_text,
         "pages": pages,
-        "created_at": datetime.utcnow()
+        "created_at": datetime.now()
     }
     
     await mongo_db.pdf_registry.insert_one(pdf_entry)
@@ -132,17 +132,35 @@ async def process_pdf_ingestion(file_content: bytes, filename: str, session_id: 
 
 async def delete_file_from_session(session_id: str, filename: str):
     """
-    Remove an uploaded file (CSV or PDF) from a session.
-    If CSV, drops its associated Postgres table and deletes its MongoDB registry entry.
+    Remove an uploaded file (CSV or PDF) or database table dataset from a session.
+    If CSV (local upload), drops its associated Postgres table and deletes its MongoDB registry entry.
+    If database table dataset, deletes its MongoDB registry entry without dropping the external table.
     If PDF, deletes its MongoDB registry entry.
     """
     mongo_db = get_mongo_db()
     
-    # Check if CSV
-    csv_doc = await mongo_db.dataset_registry.find_one({"session_id": session_id, "original_filename": filename})
+    # Check if dataset registry matches original_filename, dataset_name, or dataset_uuid
+    from bson import ObjectId
+    try:
+        obj_id = ObjectId(filename)
+    except Exception:
+        obj_id = None
+
+    csv_doc = await mongo_db.dataset_registry.find_one({
+        "session_id": session_id,
+        "$or": [
+            {"original_filename": filename},
+            {"dataset_name": filename},
+            {"dataset_uuid": filename},
+            *([{"_id": obj_id}] if obj_id else [])
+        ]
+    })
+    
     if csv_doc:
         table_name = csv_doc.get("postgres_table_name")
-        if table_name:
+        source_type = csv_doc.get("source_type")
+        # Only drop Postgres table if it was locally uploaded (not external database table)
+        if table_name and source_type != "database":
             def _drop():
                 with engine.connect() as conn:
                     # Drop table safely
@@ -154,15 +172,22 @@ async def delete_file_from_session(session_id: str, filename: str):
                 print(f"Failed to drop table {table_name}: {e}")
         
         await mongo_db.dataset_registry.delete_one({"_id": csv_doc["_id"]})
-        return {"status": "success", "message": f"Successfully removed CSV dataset '{filename}' from session"}
+        return {"status": "success", "message": f"Successfully removed dataset '{filename}' from session"}
 
     # Check if PDF
-    pdf_doc = await mongo_db.pdf_registry.find_one({"session_id": session_id, "filename": filename})
+    pdf_doc = await mongo_db.pdf_registry.find_one({
+        "session_id": session_id,
+        "$or": [
+            {"filename": filename},
+            {"dataset_name": filename},
+            *([{"_id": obj_id}] if obj_id else [])
+        ]
+    })
     if pdf_doc:
         await mongo_db.pdf_registry.delete_one({"_id": pdf_doc["_id"]})
         return {"status": "success", "message": f"Successfully removed PDF '{filename}' from session"}
 
-    raise ValueError(f"File '{filename}' not found in session '{session_id}'")
+    raise ValueError(f"File or dataset '{filename}' not found in session '{session_id}'")
 
 
 async def delete_session_data(session_id: str):
@@ -194,6 +219,7 @@ async def delete_session_data(session_id: str):
     await mongo_db.pdf_registry.delete_many({"session_id": session_id})
     await mongo_db.charts.delete_many({"session_id": session_id})
     await mongo_db.sql_connections.delete_many({"session_id": session_id})
+    await mongo_db.chats.delete_many({"session_id": session_id})
     
-    return {"status": "success", "message": f"Wiped all datasets, PDFs, charts, and connections for session '{session_id}'"}
+    return {"status": "success", "message": f"Wiped all datasets, PDFs, charts, connections, and chats for session '{session_id}'"}
 

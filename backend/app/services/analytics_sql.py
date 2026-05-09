@@ -1,7 +1,7 @@
 import asyncio
 import decimal
 from sqlalchemy import text
-from app.core.database import engine, get_mongo_db
+from app.core.database import engine, get_mongo_db, create_external_engine
 
 def sanitize_rows(rows: list) -> list:
     sanitized = []
@@ -24,12 +24,33 @@ async def get_dataset_entry(dataset_uuid: str) -> dict:
 
 async def resolve_table_name(dataset_uuid: str) -> str:
     entry = await get_dataset_entry(dataset_uuid)
+    if entry.get("source_type") == "database":
+        return entry["external_table_name"]
     return entry["postgres_table_name"]
+
+
+def resolve_engine(entry: dict):
+    """
+    Return the correct SQLAlchemy engine based on the dataset's source_type.
+    For uploaded files, returns the local staging engine.
+    For external databases, creates an ephemeral engine on demand.
+    """
+    if entry.get("source_type") == "database":
+        return create_external_engine(
+            db_type=entry["external_db_type"],
+            host=entry.get("external_host"),
+            port=entry.get("external_port"),
+            username=entry.get("external_username"),
+            password=entry.get("external_password"),
+            database_name=entry.get("external_database_name"),
+        )
+    return engine
 
 async def run_aggregation(dataset_uuid: str, metric: str, group_by: str, filter_dict: dict = None):
     entry = await get_dataset_entry(dataset_uuid)
-    table_name = entry["postgres_table_name"]
+    table_name = entry.get("external_table_name") if entry.get("source_type") == "database" else entry["postgres_table_name"]
     valid_cols = entry.get("columns", [])
+    db_engine = resolve_engine(entry)
     
     # Strictly validate against schema columns
     if metric not in valid_cols:
@@ -57,7 +78,7 @@ async def run_aggregation(dataset_uuid: str, metric: str, group_by: str, filter_
             
         query_str = f"SELECT {group_by}, SUM({metric}) as total_{metric} FROM {table_name} {where_sql} GROUP BY {group_by} ORDER BY total_{metric} DESC"
         
-        with engine.connect() as conn:
+        with db_engine.connect() as conn:
             result = conn.execute(text(query_str), bind_params)
             return sanitize_rows([dict(row._mapping) for row in result])
 
@@ -68,11 +89,25 @@ async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, m
         left_entry = await get_dataset_entry(left_uuid)
         right_entry = await get_dataset_entry(right_uuid)
         
-        left_table = left_entry["postgres_table_name"]
-        right_table = right_entry["postgres_table_name"]
+        left_table = left_entry.get("external_table_name") if left_entry.get("source_type") == "database" else left_entry["postgres_table_name"]
+        right_table = right_entry.get("external_table_name") if right_entry.get("source_type") == "database" else right_entry["postgres_table_name"]
         
         left_cols = left_entry.get("columns", [])
         right_cols = right_entry.get("columns", [])
+        
+        # Check if both datasets are on the same engine (same-server join)
+        left_source = left_entry.get("source_type", "uploaded")
+        right_source = right_entry.get("source_type", "uploaded")
+        
+        if left_source != right_source or (
+            left_source == "database" and left_entry.get("connection_id") != right_entry.get("connection_id")
+        ):
+            raise ValueError(
+                "Cannot perform SQL join across different database sources. "
+                "Use pandas_cross_dataset_correlation for cross-source analysis."
+            )
+        
+        db_engine = resolve_engine(left_entry)
         
         if not join_key or join_key not in left_cols or join_key not in right_cols:
             # Intelligently auto-resolve matching join columns
@@ -105,7 +140,7 @@ async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, m
                 GROUP BY {group_by_col}
                 ORDER BY total_{metric} DESC
             """
-            with engine.connect() as conn:
+            with db_engine.connect() as conn:
                 result = conn.execute(text(query_str))
                 return sanitize_rows([dict(row._mapping) for row in result])
 

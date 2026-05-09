@@ -21,6 +21,43 @@ async def resolve_original_filename(dataset_uuid: str) -> str:
         return registry.get("filename", dataset_uuid)
     return dataset_uuid
 
+async def fetch_chat_history_with_token_limit(session_id: str, max_tokens: int = 500) -> List[Dict[str, str]]:
+    if not session_id:
+        return []
+    try:
+        import tiktoken
+        encoding = tiktoken.encoding_for_model("gpt-4o")
+    except Exception:
+        encoding = None
+
+    db = get_mongo_db()
+    cursor = db.chats.find({"session_id": session_id}).sort("timestamp", -1).limit(15)
+    chats = await cursor.to_list(length=None)
+    
+    formatted_messages = []
+    current_tokens = 0
+    
+    for chat in chats:
+        u_text = chat.get("query", "")
+        a_text = chat.get("answer", "")
+        if not u_text or not a_text:
+            continue
+            
+        exchange_text = f"user\n{u_text}\nassistant\n{a_text}\n"
+        if encoding:
+            tokens_count = len(encoding.encode(exchange_text))
+        else:
+            tokens_count = len(exchange_text) // 4
+            
+        if current_tokens + tokens_count > max_tokens:
+            break
+            
+        current_tokens += tokens_count
+        formatted_messages.insert(0, {"role": "assistant", "content": a_text})
+        formatted_messages.insert(0, {"role": "user", "content": u_text})
+        
+    return formatted_messages
+
 async def wrap_engine_call(tool_name: str, dataset_uuid: str, coroutine, *args, **kwargs) -> Dict[str, Any]:
     """
     Executes a tool, captures duration, row_count, previews, and resolves the dataset name.
@@ -87,7 +124,7 @@ class MultiSourceAggregator:
     def get_rag_contexts(self) -> List[Dict[str, Any]]:
         return self.rag_contexts
 
-async def generate_insight_summary(query: str, aggregated_data: List[Dict[str, Any]], rag_contexts: List[Dict[str, Any]], chart_metadata: List[Dict[str, Any]] = None) -> str:
+async def generate_insight_summary(query: str, aggregated_data: List[Dict[str, Any]], rag_contexts: List[Dict[str, Any]], chart_metadata: List[Dict[str, Any]] = None, session_id: str = None) -> str:
     """
     Calls gpt-5.4-mini to synthesize the final answer and recharts JSON.
     """
@@ -155,10 +192,10 @@ CHART REFERENCES: The Chart Agent has already generated and persisted the follow
     else:
         charts_str = "\n--- GENERATED CHARTS ---\nNo charts were generated for this query.\n"
 
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"User Query: {query}\n\n{context_str}{charts_str}"}
-    ]
+    history = await fetch_chat_history_with_token_limit(session_id, max_tokens=500)
+    messages = [{"role": "system", "content": system_prompt}]
+    messages.extend(history)
+    messages.append({"role": "user", "content": f"User Query: {query}\n\n{context_str}{charts_str}"})
 
     return await client.chat.completions.create(
         model=settings.MODEL_NAME,

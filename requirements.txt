@@ -5,8 +5,10 @@ uvicorn
 pandas
 SQLAlchemy
 psycopg2-binary
+pymysql
 motor
 python-dotenv
 pdfplumber
 openai
 openpyxl
+tiktoken
