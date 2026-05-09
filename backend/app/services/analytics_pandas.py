@@ -1,14 +1,34 @@
 import asyncio
 import pandas as pd
-from app.core.database import engine
-from app.services.analytics_sql import resolve_table_name
+from app.core.database import engine, get_mongo_db, create_external_engine
+from app.services.analytics_sql import resolve_table_name, get_dataset_entry
 import math
 
 async def _load_dataframe(dataset_uuid: str) -> pd.DataFrame:
-    table_name = await resolve_table_name(dataset_uuid)
+    """
+    Load a DataFrame from the correct database source.
+    Routes to the local staging engine for uploaded files or creates an
+    ephemeral engine for external database connections.
+    """
+    entry = await get_dataset_entry(dataset_uuid)
+
+    if entry.get("source_type") == "database":
+        table_name = entry["external_table_name"]
+        db_engine = create_external_engine(
+            db_type=entry["external_db_type"],
+            host=entry.get("external_host"),
+            port=entry.get("external_port"),
+            username=entry.get("external_username"),
+            password=entry.get("external_password"),
+            database_name=entry.get("external_database_name"),
+        )
+    else:
+        table_name = entry["postgres_table_name"]
+        db_engine = engine
+
     def _fetch():
         query = f"SELECT * FROM {table_name}"
-        return pd.read_sql(query, engine)
+        return pd.read_sql(query, db_engine)
     return await asyncio.to_thread(_fetch)
 
 def _clean_nan(data):
@@ -85,8 +105,15 @@ async def detect_outliers(dataset_uuid: str, target_col: str):
         lower_bound = Q1 - 1.5 * IQR
         upper_bound = Q3 + 1.5 * IQR
         
-        outliers = df[(df[target_col] < lower_bound) | (df[target_col] > upper_bound)]
-        outliers = outliers.where(pd.notnull(outliers), None)
+        outliers_mask = (df[target_col] < lower_bound) | (df[target_col] > upper_bound)
+        outliers = df[outliers_mask].where(pd.notnull(df[outliers_mask]), None)
+
+        # Build chart_data: full context series with IQR bounds + anomaly flag per row
+        chart_df = df.copy()
+        chart_df["lower_bound"] = round(lower_bound, 4)
+        chart_df["upper_bound"] = round(upper_bound, 4)
+        chart_df["is_outlier"] = outliers_mask
+        chart_df = chart_df.where(pd.notnull(chart_df), None)
         
         return _clean_nan({
             "method": "IQR",
@@ -99,7 +126,8 @@ async def detect_outliers(dataset_uuid: str, target_col: str):
                 "median": df[target_col].median(),
                 "std_dev": df[target_col].std()
             },
-            "outliers": outliers.to_dict(orient="records")
+            "outliers": outliers.to_dict(orient="records"),
+            "chart_data": chart_df.to_dict(orient="records")
         })
         
     return await asyncio.to_thread(_process)

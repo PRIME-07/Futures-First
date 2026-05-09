@@ -128,3 +128,72 @@ async def process_pdf_ingestion(file_content: bytes, filename: str, session_id: 
     await mongo_db.pdf_registry.insert_one(pdf_entry)
     
     return {"filename": filename, "content_length": len(full_text), "status": "Text extracted"}
+
+
+async def delete_file_from_session(session_id: str, filename: str):
+    """
+    Remove an uploaded file (CSV or PDF) from a session.
+    If CSV, drops its associated Postgres table and deletes its MongoDB registry entry.
+    If PDF, deletes its MongoDB registry entry.
+    """
+    mongo_db = get_mongo_db()
+    
+    # Check if CSV
+    csv_doc = await mongo_db.dataset_registry.find_one({"session_id": session_id, "original_filename": filename})
+    if csv_doc:
+        table_name = csv_doc.get("postgres_table_name")
+        if table_name:
+            def _drop():
+                with engine.connect() as conn:
+                    # Drop table safely
+                    conn.execute(f'DROP TABLE IF EXISTS "{table_name}"')
+            try:
+                await asyncio.to_thread(_drop)
+            except Exception as e:
+                # Log and continue even if drop table fails
+                print(f"Failed to drop table {table_name}: {e}")
+        
+        await mongo_db.dataset_registry.delete_one({"_id": csv_doc["_id"]})
+        return {"status": "success", "message": f"Successfully removed CSV dataset '{filename}' from session"}
+
+    # Check if PDF
+    pdf_doc = await mongo_db.pdf_registry.find_one({"session_id": session_id, "filename": filename})
+    if pdf_doc:
+        await mongo_db.pdf_registry.delete_one({"_id": pdf_doc["_id"]})
+        return {"status": "success", "message": f"Successfully removed PDF '{filename}' from session"}
+
+    raise ValueError(f"File '{filename}' not found in session '{session_id}'")
+
+
+async def delete_session_data(session_id: str):
+    """
+    Wipes all session-specific data.
+    Drops any associated Postgres tables (uploaded files only), deletes all file registry records,
+    external connection metadata, and removes all charts.
+    """
+    mongo_db = get_mongo_db()
+    
+    # 1. Fetch and drop only uploaded CSV tables (not external DB tables)
+    cursor = mongo_db.dataset_registry.find({"session_id": session_id})
+    datasets = await cursor.to_list(length=100)
+    for ds in datasets:
+        # Only drop tables that were created locally from uploaded files
+        if ds.get("source_type") != "database":
+            table_name = ds.get("postgres_table_name")
+            if table_name:
+                def _drop():
+                    with engine.connect() as conn:
+                        conn.execute(f'DROP TABLE IF EXISTS "{table_name}"')
+                try:
+                    await asyncio.to_thread(_drop)
+                except Exception as e:
+                    print(f"Failed to drop table {table_name} during session wipe: {e}")
+                
+    # 2. Clear MongoDB datasets, PDFs, charts, and external connections
+    await mongo_db.dataset_registry.delete_many({"session_id": session_id})
+    await mongo_db.pdf_registry.delete_many({"session_id": session_id})
+    await mongo_db.charts.delete_many({"session_id": session_id})
+    await mongo_db.sql_connections.delete_many({"session_id": session_id})
+    
+    return {"status": "success", "message": f"Wiped all datasets, PDFs, charts, and connections for session '{session_id}'"}
+

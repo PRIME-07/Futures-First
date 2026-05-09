@@ -87,7 +87,7 @@ class MultiSourceAggregator:
     def get_rag_contexts(self) -> List[Dict[str, Any]]:
         return self.rag_contexts
 
-async def generate_insight_summary(query: str, aggregated_data: List[Dict[str, Any]], rag_contexts: List[Dict[str, Any]]) -> str:
+async def generate_insight_summary(query: str, aggregated_data: List[Dict[str, Any]], rag_contexts: List[Dict[str, Any]], chart_metadata: List[Dict[str, Any]] = None) -> str:
     """
     Calls gpt-5.4-mini to synthesize the final answer and recharts JSON.
     """
@@ -115,8 +115,8 @@ You MUST format your analytical response into the following exact sections if ap
 7. Operational Recommendations
 8. Confidence & Limitations
 
-RECHARTS CONFIGURATION: If the user query benefits from a chart, include a JSON block enclosed in ```json ... ``` that contains a valid Recharts-compatible array. Keys MUST EXACTLY MATCH the lowercase, snake_case column names from the structured data provided.
-"""
+CHART REFERENCES: The Chart Agent has already generated and persisted the following charts to accompany your response. You MUST reference each chart naturally and explicitly inside the relevant section of your response using the format: **[Chart Title]**. Do not invent chart titles — only reference those listed below."""
+
 
     evidence_bundle = {
         "aggregations": [],
@@ -147,9 +147,17 @@ RECHARTS CONFIGURATION: If the user query benefits from a chart, include a JSON 
 
     context_str = f"--- STRUCTURED EVIDENCE BUNDLE ---\n{json.dumps(evidence_bundle, indent=2)}\n"
 
+    charts_str = ""
+    if chart_metadata:
+        charts_str = "\n--- GENERATED CHARTS (reference these by title in your response) ---\n"
+        for cm in chart_metadata:
+            charts_str += f"- [{cm['title']}] (type: {cm['chart_type']}, id: {cm['chart_id']})\n"
+    else:
+        charts_str = "\n--- GENERATED CHARTS ---\nNo charts were generated for this query.\n"
+
     messages = [
         {"role": "system", "content": system_prompt},
-        {"role": "user", "content": f"User Query: {query}\n\n{context_str}"}
+        {"role": "user", "content": f"User Query: {query}\n\n{context_str}{charts_str}"}
     ]
 
     return await client.chat.completions.create(

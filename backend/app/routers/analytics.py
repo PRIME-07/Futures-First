@@ -114,3 +114,27 @@ async def pandas_categorical_profiles(req: CategoricalProfilesRequest):
     except Exception as e:
          raise HTTPException(status_code=500, detail=str(e))
 
+@router.get("/sessions/{session_id}/charts")
+async def get_session_charts(session_id: str):
+    try:
+        from app.core.database import get_mongo_db
+        db = get_mongo_db()
+        cursor = db.charts.find({"session_id": session_id})
+        charts = await cursor.to_list(length=100)
+        return {"status": "success", "data": charts}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch session charts: {str(e)}")
+
+@router.get("/charts/{chart_id}")
+async def get_chart_details(chart_id: str):
+    try:
+        from app.core.database import get_mongo_db
+        db = get_mongo_db()
+        chart = await db.charts.find_one({"_id": chart_id})
+        if not chart:
+            raise HTTPException(status_code=404, detail="Chart not found")
+        return {"status": "success", "data": chart}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to fetch chart details: {str(e)}")
