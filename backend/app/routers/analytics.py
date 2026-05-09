@@ -35,6 +35,13 @@ class OutlierRequest(BaseModel):
 class CategoricalProfilesRequest(BaseModel):
     dataset_uuid: str
 
+class CrossDatasetCorrelationRequest(BaseModel):
+    dataset1_uuid: str
+    metric1: str
+    dataset2_uuid: str
+    metric2: str
+    join_key: str
+
 @router.post("/sql/aggregate")
 async def sql_aggregate(req: AggregationRequest):
     try:
@@ -75,6 +82,18 @@ async def pandas_correlation(req: CorrelationRequest):
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
+@router.post("/pandas/cross_dataset_correlation")
+async def pandas_cross_dataset_correlation(req: CrossDatasetCorrelationRequest):
+    try:
+        res = await analytics_pandas.cross_dataset_correlation(
+            req.dataset1_uuid, req.metric1, req.dataset2_uuid, req.metric2, req.join_key
+        )
+        return {"status": "success", "data": res}
+    except ValueError as e:
+        raise HTTPException(status_code=400, detail=str(e))
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
 @router.post("/pandas/outliers")
 async def pandas_outliers(req: OutlierRequest):
     try:
@@ -94,3 +113,4 @@ async def pandas_categorical_profiles(req: CategoricalProfilesRequest):
          raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
          raise HTTPException(status_code=500, detail=str(e))
+

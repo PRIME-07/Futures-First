@@ -49,13 +49,14 @@ Your task is to analyze the user's query and output a structured JSON command th
 CRITICAL RULES:
 1. You MUST output a JSON object containing exactly one key: "tool_calls", which is a list of tool execution plans.
 2. CAPABILITY-DRIVEN ROUTING: Review the capabilities of each intent below. Based on the user's query, dynamically decide which specific tools and datasets will provide the best analytical evidence. Deploy ONLY the tools needed to answer the query; do not spam unrelated datasets.
-3. IMPLICIT CROSS-DATASET CORRELATION: You must act as an expert analyst. Even if the user doesn't explicitly ask you to "correlate" or "compare", if answering their broad ecosystem question requires bridging metrics across different datasets, you MUST proactively deploy tools to fetch both. DO NOT use `sql_join_aggregate` for this. Instead, output MULTIPLE separate `sql_aggregate` tools (one for each dataset) in parallel, grouping them by a common dimension (e.g., 'month' or 'movie_id'). The synthesis engine will handle the final correlation.
+3. IMPLICIT CROSS-DATASET CORRELATION: You must act as an expert analyst. Even if the user doesn't explicitly ask you to "correlate" or "compare", if answering their broad ecosystem question requires bridging metrics across different datasets, you MUST proactively deploy tools to fetch both. Use `pandas_cross_dataset_correlation` to deterministically aggregate both metrics and join them for cross-dataset correlation.
 4. Each object in "tool_calls" MUST contain EXACTLY two keys: "intent" and "parameters".
 5. The "intent" MUST be exactly ONE of the following:
    - "sql_aggregate": Best for finding totals, maximums, minimums, or grouping metrics by a dimension (like month or genre).
    - "sql_join_aggregate": Use ONLY if a single metric needs to be summed after joining two tables.
    - "pandas_rolling_average": Best for smoothing time-series trends over a window.
    - "pandas_correlation": Best for finding mathematical correlation coefficients between numerical columns within a SINGLE table.
+   - "pandas_cross_dataset_correlation": Best for comparing or correlating metrics between TWO DIFFERENT datasets by aggregating and joining them on a common dimension (e.g., movie_id or month).
    - "pandas_outliers": Best for detecting anomalies, spikes, or extreme values in a numeric column.
    - "pandas_categorical_profiles": Best for comparing performance or distributions across categorical segments (e.g., platform, campaign_type).
    - "rag_retrieve": Best for answering questions about strategy, rules, guidelines, or extracting insights from unstructured text/PDFs.
@@ -66,6 +67,7 @@ REQUIRED PARAMETERS FOR EACH INTENT:
 - "sql_join_aggregate": {{"left_dataset_uuid": "...", "right_dataset_uuid": "...", "join_key": "...", "metric": "...", "group_by": "..."}}
 - "pandas_rolling_average": {{"dataset_uuid": "...", "target_col": "...", "window": 7, "sort_col": "..."}}
 - "pandas_correlation": {{"dataset_uuid": "...", "columns": ["...", "..."]}}
+- "pandas_cross_dataset_correlation": {{"dataset1_uuid": "...", "metric1": "...", "dataset2_uuid": "...", "metric2": "...", "join_key": "..."}}
 - "pandas_outliers": {{"dataset_uuid": "...", "target_col": "..."}}
 - "pandas_categorical_profiles": {{"dataset_uuid": "..."}}
 - "rag_retrieve": {{}} (no dataset_uuid required)
@@ -167,6 +169,16 @@ async def orchestrate_pipeline(query: str, session_id: str, aggregator: MultiSou
                 res = await wrap_engine_call(
                     intent, dataset_uuid, analytics_pandas.calculate_correlation_matrix,
                     dataset_uuid, params.get("columns")
+                )
+                aggregator.add_structured_result(res)
+                return res
+                
+            elif intent == "pandas_cross_dataset_correlation":
+                res = await wrap_engine_call(
+                    intent, params.get("dataset1_uuid"), analytics_pandas.cross_dataset_correlation,
+                    params.get("dataset1_uuid"), params.get("metric1"),
+                    params.get("dataset2_uuid"), params.get("metric2"),
+                    params.get("join_key")
                 )
                 aggregator.add_structured_result(res)
                 return res

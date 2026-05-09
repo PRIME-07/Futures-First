@@ -87,12 +87,73 @@ async def detect_outliers(dataset_uuid: str, target_col: str):
         
         outliers = df[(df[target_col] < lower_bound) | (df[target_col] > upper_bound)]
         outliers = outliers.where(pd.notnull(outliers), None)
+        
         return _clean_nan({
-            "bounds": {"lower": lower_bound, "upper": upper_bound},
+            "method": "IQR",
+            "metric": target_col,
+            "lower_bound": lower_bound,
+            "upper_bound": upper_bound,
+            "outlier_count": len(outliers),
+            "distribution_summary": {
+                "mean": df[target_col].mean(),
+                "median": df[target_col].median(),
+                "std_dev": df[target_col].std()
+            },
             "outliers": outliers.to_dict(orient="records")
         })
         
     return await asyncio.to_thread(_process)
+
+async def cross_dataset_correlation(dataset1_uuid: str, metric1: str, dataset2_uuid: str, metric2: str, join_key: str):
+    df1 = await _load_dataframe(dataset1_uuid)
+    df2 = await _load_dataframe(dataset2_uuid)
+    
+    def _process():
+        if metric1 not in df1.columns or join_key not in df1.columns:
+            raise ValueError(f"Columns missing in dataset 1. Required: {metric1}, {join_key}")
+        if metric2 not in df2.columns or join_key not in df2.columns:
+            raise ValueError(f"Columns missing in dataset 2. Required: {metric2}, {join_key}")
+            
+        agg1 = df1.groupby(join_key, as_index=False)[metric1].sum()
+        agg2 = df2.groupby(join_key, as_index=False)[metric2].sum()
+        
+        merged = pd.merge(agg1, agg2, on=join_key, how='inner')
+        if merged.empty:
+            return {"error": "Join resulted in empty dataframe"}
+            
+        corr = merged[[metric1, metric2]].corr().round(4).iloc[0, 1]
+        
+        if pd.isna(corr):
+            strength = "unknown"
+            direction = "none"
+        else:
+            abs_corr = abs(corr)
+            if abs_corr >= 0.7:
+                strength = "strong"
+            elif abs_corr >= 0.4:
+                strength = "moderate"
+            elif abs_corr >= 0.2:
+                strength = "weak"
+            else:
+                strength = "minimal"
+            direction = "positive" if corr >= 0 else "negative"
+            
+        return _clean_nan({
+            "artifact_type": "joined_timeseries",
+            "join_type": "inner",
+            "join_key": join_key,
+            "pre_join_rows": [len(agg1), len(agg2)],
+            "post_join_rows": len(merged),
+            "alignment_type": "aggregated",
+            "columns": [metric1, metric2],
+            "correlation": corr,
+            "strength": strength,
+            "direction": direction,
+            "business_interpretation": f"A {strength} {direction} relationship exists between {metric1} and {metric2}.",
+            "data": merged.to_dict(orient="records")
+        })
+    return await asyncio.to_thread(_process)
+
 
 async def generate_categorical_profiles(dataset_uuid: str):
     df = await _load_dataframe(dataset_uuid)
