@@ -115,7 +115,7 @@ export default function Sidebar() {
         <span className="font-light">Created by <span className="font-semibold text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors">Anuj Mankumare</span></span>
         <div className="flex items-center gap-1">
           <a
-            href="https://github.com/PRIME-07/Futures-First"
+            href="https://www.linkedin.com/in/mankumare-anuj"
             target="_blank"
             rel="noreferrer"
             className="p-1.5 text-gray-400 hover:text-blue-600 dark:text-gray-500 dark:hover:text-blue-400 hover:bg-gray-100 dark:hover:bg-[#1e2026] rounded-md transition-all cursor-pointer"
@@ -128,7 +128,7 @@ export default function Sidebar() {
             </svg>
           </a>
           <a
-            href="https://github.com/anujmankumare"
+            href="https://github.com/PRIME-07/Futures-First"
             target="_blank"
             rel="noreferrer"
             className="p-1.5 text-gray-400 hover:text-gray-900 dark:text-gray-500 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-[#1e2026] rounded-md transition-all cursor-pointer"

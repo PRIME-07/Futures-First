@@ -68,7 +68,7 @@ flowchart TD
 
 ## ⚡ Key Features
 
-*   **Precise Conversational Memory (Tiktoken-Capped Buffer):** The Orchestrator and Synthesizer analyze recent chat interactions up to a strict **500-token window** (precisely calculated using `tiktoken` for `gpt-4o` token schemas). This lets you ask context-rich follow-ups (e.g., *"Why is Stellar Run trending?"* followed by *"Plot its rolling average"*).
+*   **Precise Conversational Memory (Tiktoken-Capped Buffer):** The Orchestrator and Synthesizer analyze recent chat interactions up to a strict **500-token window** (precisely calculated using `tiktoken` for `gpt-4o-mini` (GPT 5.4 Mini model) token schemas). This lets you ask context-rich follow-ups (e.g., *"Why is Stellar Run trending?"* followed by *"Plot its rolling average"*).
 *   **Conversational Greetings Bypass:** Polite queries (e.g., *"hi"*, *"hello"*, *"how can you help me"*) skip heavy database orchestration to return a warm intro of capabilities instantly.
 *   **Seamless Ingestion Names:** When uploading datasets or reports, the `dataset_name` is optional. The backend automatically falls back to `file.filename` while validating case-insensitive extensions (e.g., `.pdf`, `.csv`, `.xlsx`).
 *   **Connected Sources Tracker:** Access `GET /ingest/sessions/{session_id}/sources` to instantly audit all datasets, PDFs (excluding heavy text bodies), and SQL connections loaded into an active session.
@@ -80,7 +80,7 @@ flowchart TD
 | Layer | Technologies Used | Key Benefits |
 | :--- | :--- | :--- |
 | **Backend API** | FastAPI, Uvicorn, Python 3.11 | High performance, fully async networking, self-documenting OpenAPI. |
-| **Orchestration** | OpenAI API (`gpt-4o`), `tiktoken` | Advanced tool extraction and multi-turn conversational reasoning. |
+| **Orchestration** | OpenAI API (`gpt-4o-mini` / GPT 5.4 Mini model), `tiktoken` | Advanced tool extraction and multi-turn conversational reasoning. |
 | **RAG Engine** | FAISS, PyTorch (`SentenceTransformers`) | Dense vector search with native text extraction and page citations. |
 | **Relational DB** | PostgreSQL, MySQL, SQLAlchemy | Dedicated database hosts for synthetic analytics schemas. |
 | **NoSQL / Logs** | MongoDB, Motor (Async) | High-speed storage for chat logs, session registries, and metrics. |
@@ -185,31 +185,39 @@ To connect to these databases in a session, use the **Add Data Source** form in 
 
 ## 📊 Business Analyst How-To Guide
 
-Here is a typical flow of how to use **Insight Monkey** to analyze data from scratch:
+Here is a typical flow of how to use **Insight Monkey** directly from the premium frontend user interface:
 
-### 1. Start a Session & Upload Documents
-1. Open the UI or trigger `POST /ingest/` with a CSV or Excel spreadsheet (such as `marketing_spend.csv` or `regional_performance.csv`).
-2. Upload unstructured PDFs via the same unified `POST /ingest/` endpoint (such as `quarterly_report.pdf`).
-3. View all loaded files and registries by querying `GET /ingest/sessions/{session_id}/sources`.
+### 1. Start a Session & Create Conversations
+1. Open the web interface in your browser (typically `http://localhost:5173`).
+2. Click **"New Session"** in the left sidebar to spin up a fully isolated private environment.
+3. Your active conversation timeline will load instantly, ready for interactive query streaming.
 
-### 2. Connect Your SQL Databases
-1. Connect a database (e.g. Movies DB) to your session by submitting its credentials to the connection router.
-2. The orchestrator automatically introspects the table schemas and lists them instantly for query routing.
+### 2. Connect Your Data Sources (CSV, Excel, PDF)
+1. On the right-hand side, click the **"Manage Sources"** button in the **Data Sources** panel.
+2. Select your file type from the dropdown (such as `CSV File`, `Excel Spreadsheet`, or `PDF Document`).
+3. Drag-and-drop or click to upload your files (such as `marketing_spend.csv` or `quarterly_report.pdf`) from your system.
+4. Click **"Connect Source"** to securely index it into your session.
 
-### 3. Ask Context-Rich Questions
-Ask questions in the chat window, such as:
-*   *"Which titles performed best in 2025 according to our quarterly report?"* (Routes to FAISS RAG, provides page citations)
-*   *"Can you plot a rolling average of marketing spend?"* (Routes to Pandas analytical tools, generates interactive chart)
-*   *"Is there a correlation between CTR and sales conversions?"* (Routes to cross-dataset correlation joiner)
+### 3. Link Relational SQL Databases
+1. In the same **"Manage Sources"** panel, choose `PostgreSQL Database` or `MySQL Database` from the type selector.
+2. Enter your connection credentials (such as **Host**, **Port**, **Database Name**, **Username**, and **Password**).
+3. Click **"Connect Source"**. The system will dynamically introspect the database schemas and list them on your sidebar for immediate analytical querying.
+
+### 4. Ask Context-Rich Questions & Generate Charts
+Type questions directly in the chat window, such as:
+*   *"Which titles performed best in 2025 according to our quarterly report?"* (Searches PDFs and provides page citations)
+*   *"Can you plot a rolling average of marketing spend?"* (Computes rolling averages and displays an interactive Recharts area graph)
+*   *"Is there a correlation between CTR and sales conversions?"* (Triggers cross-dataset correlation analysis)
 
 ---
 
 ## 🔒 Assumptions & Architectural Tradeoffs
 
+*   **Bare Minimum Relevance Filter Checks:** We have added only the bare minimum of query filters to check if the user's question is strictly related to data analysis and insight generation. Outside of greetings, if a user asks questions unrelated to the connected data schemas or analytics, the system may provide inaccurate or "bs" fallback responses. We assumed that questions will be given in accordance with the specified data analysis use case only.
 *   **Vector Search Scope**: FAISS indexes are stored in-memory per API deployment context, paired with MongoDB for persistence. This guarantees blazing-fast retrieval speeds without the cost of remote vector database calls.
 *   **Pandas-in-Worker Execution**: Standard analytical calculations (correlation coefficients, rolling trends, outlier detection) run in isolated Python processes using Pandas, keeping the primary SQL database free of heavy statistical computation overhead.
 *   **Session Isolation**: Data is separated securely using session IDs. Deleting a session clears all connected datasets from PostgreSQL, text indexes from MongoDB, and its entire conversational chat log cleanly.
 
 ---
 
-*Insight Monkey is crafted with 💖 to deliver secure, explainable, and lightning-fast enterprise intelligence.*
+*Insight Monkey is crafted with 💖 by **[Anuj Mankumare](https://www.linkedin.com/in/mankumare-anuj)**. Explore the source on **[GitHub](https://github.com/PRIME-07/Futures-First)**.*
