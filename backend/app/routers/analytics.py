@@ -41,6 +41,8 @@ class CrossDatasetCorrelationRequest(BaseModel):
     dataset2_uuid: str
     metric2: str
     join_key: str
+    filter_dict1: Optional[Dict] = None
+    filter_dict2: Optional[Dict] = None
 
 @router.post("/sql/aggregate")
 async def sql_aggregate(req: AggregationRequest):
@@ -86,7 +88,8 @@ async def pandas_correlation(req: CorrelationRequest):
 async def pandas_cross_dataset_correlation(req: CrossDatasetCorrelationRequest):
     try:
         res = await analytics_pandas.cross_dataset_correlation(
-            req.dataset1_uuid, req.metric1, req.dataset2_uuid, req.metric2, req.join_key
+            req.dataset1_uuid, req.metric1, req.dataset2_uuid, req.metric2, req.join_key,
+            req.filter_dict1, req.filter_dict2
         )
         return {"status": "success", "data": res}
     except ValueError as e:

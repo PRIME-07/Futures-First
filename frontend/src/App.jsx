@@ -34,8 +34,8 @@ function MainAppContent() {
         {renderCentralPanel()}
       </div>
 
-      {/* Right Sidebar - connected sources list, shown only during active chat and conversations tab */}
-      {activeSessionId && sidebarTab === 'conversations' && (
+      {/* Right Sidebar - connected sources list, shown staticly during conversations tab */}
+      {sidebarTab === 'conversations' && (
         <RightSidebar />
       )}
     </div>

@@ -1,4 +1,4 @@
-# 🐒 Insight Monkey — Secure AI Insights Assistant
+# <img src="frontend/src/assets/logo.svg" width="36" height="36" align="center" style="vertical-align: middle; margin-right: 8px;" /> 🐒 Insight Monkey — Secure AI Insights Assistant
 
 Insight Monkey is a state-of-the-art, secure, multi-source enterprise business intelligence and analytics assistant. Built to combine structured relational data, unstructured document text (PDFs), and uploaded spreadsheets (CSV/Excel) within high-integrity private sessions, it empowers executives and analysts to extract decision-ready insights, compute critical temporal business metrics, and generate beautiful interactive charts—all within a single private and secure AI conversation.
 
@@ -25,7 +25,7 @@ flowchart TD
 
     subgraph Secure Storage Engines
         PG[(Local PostgreSQL)]
-        VectorDB[(FAISS Vector Embeddings)]
+        VectorDB[(ChromaDB Vector Storage)]
         Mongo[(MongoDB Registry)]
     end
 
@@ -51,7 +51,7 @@ flowchart TD
     Orchestrator -->|Bypass if Greeting| GreetingStream[SSE Stream: Warm Intro & Capabilities]
     Orchestrator -->|Execute SQL Aggregate| ToolSQL[SQL Tools: Local/External Postgres, MySQL]
     Orchestrator -->|Execute Pandas Rolling Avg/Corr/Outliers| ToolPandas[Pandas Advanced Analytical Tools]
-    Orchestrator -->|Execute RAG Citation Search| ToolRAG[FAISS Retrieval with strict citations]
+    Orchestrator -->|Execute RAG Citation Search| ToolRAG[ChromaDB Retrieval with strict citations]
 
     ToolSQL --> Aggregator[Multi-Source Aggregator]
     ToolPandas --> Aggregator
@@ -68,10 +68,12 @@ flowchart TD
 
 ## ⚡ Key Features
 
-*   **Precise Conversational Memory (Tiktoken-Capped Buffer):** The Orchestrator and Synthesizer analyze recent chat interactions up to a strict **500-token window** (precisely calculated using `tiktoken` for `gpt-4o-mini` (GPT 5.4 Mini model) token schemas). This lets you ask context-rich follow-ups (e.g., *"Why is Stellar Run trending?"* followed by *"Plot its rolling average"*).
-*   **Conversational Greetings Bypass:** Polite queries (e.g., *"hi"*, *"hello"*, *"how can you help me"*) skip heavy database orchestration to return a warm intro of capabilities instantly.
-*   **Seamless Ingestion Names:** When uploading datasets or reports, the `dataset_name` is optional. The backend automatically falls back to `file.filename` while validating case-insensitive extensions (e.g., `.pdf`, `.csv`, `.xlsx`).
-*   **Connected Sources Tracker:** Access `GET /ingest/sessions/{session_id}/sources` to instantly audit all datasets, PDFs (excluding heavy text bodies), and SQL connections loaded into an active session.
+*   **Precise Conversational Memory (Tiktoken-Capped Buffer):** The Orchestrator and Synthesizer analyze recent chat interactions up to a strict **500-token window** (precisely calculated using `tiktoken` for `gpt-4o-mini` token schemas) to ensure prompt memory and state preservation.
+*   **LLM Conversational Router & Off-Topic Refusal Policy:** Greetings and questions about capabilities, system structure, or connected data sources are routed through a fast, conversational LLM classifier to bypass tool execution. If a user tries to wander off-topic (e.g., asking for creative stories, poems, coding requests, recipes, or essays), the model politely refuses, keeping conversations strictly tied to data analytics.
+*   **Dynamic, Contextual Introductions:** The assistant greets the user warmly, introducing itself as "Insight Monkey" and clearly explaining that it has full access to the datasets and connections loaded in the active session on the right-hand panel.
+*   **Lazy Session Instantiation:** Resolves the "ghost session" landing page bug. Sessions are initialized lazily upon the user's first query submission or connection of a datasource, ensuring clean session databases.
+*   **Static Right Sidebar & Workspace Clearing Fix:** The right sidebar remains visible statically across all conversation tab views. When the user clicks **New Session**, the workspace successfully clears to the landing page without reverting to previous sessions.
+*   **Seamless Ingestion Names & Deletion Cascades:** Automatically falls back to the filename when a dataset name is not supplied. Deleting a session executes a permanent database cascade to clean MongoDB registries and drop staging tables from PostgreSQL.
 
 ---
 
@@ -81,7 +83,7 @@ flowchart TD
 | :--- | :--- | :--- |
 | **Backend API** | FastAPI, Uvicorn, Python 3.11 | High performance, fully async networking, self-documenting OpenAPI. |
 | **Orchestration** | OpenAI API (`gpt-4o-mini` / GPT 5.4 Mini model), `tiktoken` | Advanced tool extraction and multi-turn conversational reasoning. |
-| **RAG Engine** | FAISS, PyTorch (`SentenceTransformers`) | Dense vector search with native text extraction and page citations. |
+| **RAG Engine** | ChromaDB, SentenceTransformers (`all-MiniLM-L6-v2`) | Dense vector search with native text extraction and page citations. |
 | **Relational DB** | PostgreSQL, MySQL, SQLAlchemy | Dedicated database hosts for synthetic analytics schemas. |
 | **NoSQL / Logs** | MongoDB, Motor (Async) | High-speed storage for chat logs, session registries, and metrics. |
 | **Frontend UI** | React 19, Vite, Tailwind CSS v4 | Rapid hot-module replacement, modern flexbox designs, premium themes. |
@@ -213,10 +215,10 @@ Type questions directly in the chat window, such as:
 
 ## 🔒 Assumptions & Architectural Tradeoffs
 
-*   **Bare Minimum Relevance Filter Checks:** We have added only the bare minimum of query filters to check if the user's question is strictly related to data analysis and insight generation. Outside of greetings, if a user asks questions unrelated to the connected data schemas or analytics, the system may provide inaccurate or "bs" fallback responses. We assumed that questions will be given in accordance with the specified data analysis use case only.
-*   **Vector Search Scope**: FAISS indexes are stored in-memory per API deployment context, paired with MongoDB for persistence. This guarantees blazing-fast retrieval speeds without the cost of remote vector database calls.
+*   **Off-Topic Query Filtering**: Rather than relying on fragile keyword checkers, we deploy a fast, cheap classification call to analyze user queries. This ensures all off-topic requests (stories, essays, coding, recipes) are securely refused, while greetings and general chitchat are handled gracefully.
+*   **Vector Search Scope**: ChromaDB vector storage is containerized and indexed per `session_id`. This guarantees blazing-fast, isolated vector retrieval speeds.
 *   **Pandas-in-Worker Execution**: Standard analytical calculations (correlation coefficients, rolling trends, outlier detection) run in isolated Python processes using Pandas, keeping the primary SQL database free of heavy statistical computation overhead.
-*   **Session Isolation**: Data is separated securely using session IDs. Deleting a session clears all connected datasets from PostgreSQL, text indexes from MongoDB, and its entire conversational chat log cleanly.
+*   **Session Isolation**: Data is separated securely using session IDs. Deleting a session clears all connected datasets from PostgreSQL, text indexes from MongoDB, chunks from ChromaDB, and its entire conversational chat log cleanly.
 
 ---
 

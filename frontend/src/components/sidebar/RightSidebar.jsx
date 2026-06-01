@@ -3,12 +3,12 @@ import { useApp } from '../../context/AppContext';
 import { Database, FileSpreadsheet, FileText, Plus, Trash2, X, Link, Server, Loader2 } from 'lucide-react';
 
 export default function RightSidebar() {
-  const { dataSources, removeDataSource, activeSessionId, apiOnline, fetchSessionConnections } = useApp();
+  const { dataSources, removeDataSource, activeSessionId, apiOnline, fetchSessionConnections, getOrCreateSession } = useApp();
   const [showManageModal, setShowManageModal] = useState(false);
   const [newType, setNewType] = useState('PostgreSQL');
 
   // File Upload State
-  const [selectedFile, setSelectedFile] = useState(null);
+  const [selectedFiles, setSelectedFiles] = useState([]);
 
   // Database Connection State
   const [dbHost, setDbHost] = useState('localhost');
@@ -34,15 +34,49 @@ export default function RightSidebar() {
     }
   };
 
+  const handleFileChange = (e) => {
+    const files = Array.from(e.target.files);
+    const validExtensions = ['.csv', '.pdf', '.xlsx', '.xls'];
+    const currentFiles = [...selectedFiles];
+    let newError = '';
+
+    for (let file of files) {
+      const ext = '.' + file.name.split('.').pop().toLowerCase();
+      if (!validExtensions.includes(ext)) {
+        newError = `Incompatible file format: ${file.name}. Only CSV, PDF, and Excel files are allowed.`;
+        continue;
+      }
+      
+      if (currentFiles.some(f => f.name === file.name)) {
+        newError = `Duplicate file skipped: ${file.name} is already in the upload list.`;
+        continue;
+      }
+
+      if (dataSources.some(ds => ds.name === file.name)) {
+        newError = `File already connected: ${file.name} is already uploaded to this session.`;
+        continue;
+      }
+
+      currentFiles.push(file);
+    }
+
+    if (newError) {
+      setError(newError);
+    } else {
+      setError('');
+    }
+    setSelectedFiles(currentFiles);
+  };
+
   const handleAddSource = async (e) => {
     e.preventDefault();
     setError('');
     setLoading(true);
 
-    if (!activeSessionId) {
-      setError('No active session selected.');
-      setLoading(false);
-      return;
+    let sessionId = activeSessionId;
+    if (!sessionId) {
+      const defaultTitle = isDatabase ? `${dbName} Database` : (selectedFiles[0] ? selectedFiles[0].name : 'New Session');
+      sessionId = getOrCreateSession(defaultTitle);
     }
 
     try {
@@ -54,7 +88,7 @@ export default function RightSidebar() {
         }
 
         const payload = {
-          session_id: activeSessionId,
+          session_id: sessionId,
           db_type: newType.toLowerCase(),
           host: dbHost,
           port: parseInt(dbPort, 10),
@@ -75,32 +109,34 @@ export default function RightSidebar() {
         }
 
       } else {
-        if (!selectedFile) {
-          setError('Please select a file to upload.');
+        if (selectedFiles.length === 0) {
+          setError('Please select at least one file to upload.');
           setLoading(false);
           return;
         }
 
-        const formData = new FormData();
-        formData.append('file', selectedFile);
-        formData.append('session_id', activeSessionId);
+        for (let file of selectedFiles) {
+          const formData = new FormData();
+          formData.append('file', file);
+          formData.append('session_id', sessionId);
 
-        const response = await fetch('http://localhost:8000/ingest/', {
-          method: 'POST',
-          body: formData
-        });
+          const response = await fetch('http://localhost:8000/ingest/', {
+            method: 'POST',
+            body: formData
+          });
 
-        const res = await response.json();
-        if (!response.ok || res.status !== 'success') {
-          throw new Error(res.detail || res.message || 'File upload failed.');
+          const res = await response.json();
+          if (!response.ok || res.status !== 'success') {
+            throw new Error(res.detail || res.message || `Upload failed for ${file.name}`);
+          }
         }
       }
 
       // Success - Refresh Sources List & Reset Fields
       if (fetchSessionConnections) {
-        await fetchSessionConnections(activeSessionId);
+        await fetchSessionConnections(sessionId);
       }
-      setSelectedFile(null);
+      setSelectedFiles([]);
       setDbName('');
       setDbUser('');
       setDbPassword('');
@@ -237,9 +273,7 @@ export default function RightSidebar() {
                 >
                   <option value="PostgreSQL">PostgreSQL Database</option>
                   <option value="MySQL">MySQL Database</option>
-                  <option value="CSV">CSV File</option>
-                  <option value="Spreadsheet">Excel Spreadsheet (.xlsx, .xls)</option>
-                  <option value="PDF">PDF Document</option>
+                  <option value="File">File Upload (CSV, PDF, Excel)</option>
                 </select>
               </div>
 
@@ -305,24 +339,45 @@ export default function RightSidebar() {
                 </div>
               ) : (
                 <div className="flex flex-col gap-1">
-                  <label className="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-medium">Upload File</label>
+                  <label className="text-[10px] text-gray-400 dark:text-gray-500 uppercase font-medium">Upload Files</label>
                   <div className="relative border-2 border-dashed border-gray-200 dark:border-[#1e2026] rounded-lg p-4 text-center hover:border-orange-500/50 transition-colors bg-gray-50/50 dark:bg-[#14151b]/50">
                     <input
                       type="file"
-                      accept={newType === 'PDF' ? '.pdf' : (newType === 'CSV' ? '.csv' : '.xls,.xlsx')}
-                      onChange={(e) => setSelectedFile(e.target.files[0])}
+                      accept=".csv,.pdf,.xlsx,.xls"
+                      multiple
+                      onChange={handleFileChange}
                       className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
                     />
                     <div className="flex flex-col items-center gap-1">
                       <Plus size={16} className="text-gray-400" />
                       <span className="text-[11px] text-gray-500 dark:text-gray-400 font-medium">
-                        {selectedFile ? selectedFile.name : 'Select file from system'}
+                        Select files (CSV, PDF, Excel)
                       </span>
                       <span className="text-[9px] text-gray-400">
-                        {newType === 'PDF' ? 'PDF up to 50MB' : (newType === 'CSV' ? 'CSV up to 20MB' : 'Excel up to 20MB')}
+                        Supports multiple uploads at a time
                       </span>
                     </div>
                   </div>
+                  {selectedFiles.length > 0 && (
+                    <div className="flex flex-col gap-1.5 mt-2 max-h-28 overflow-y-auto scrollbar-none">
+                      <span className="text-[9px] text-gray-400 dark:text-gray-500 uppercase tracking-wide font-medium">To Upload</span>
+                      {selectedFiles.map((file, idx) => (
+                        <div key={idx} className="flex justify-between items-center p-1.5 bg-gray-50 dark:bg-[#14151b] rounded-md text-xs">
+                          <span className="truncate max-w-[220px] text-gray-700 dark:text-gray-300" title={file.name}>{file.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setSelectedFiles(selectedFiles.filter((_, i) => i !== idx));
+                              setError('');
+                            }}
+                            className="text-gray-400 dark:text-gray-500 hover:text-red-500 cursor-pointer"
+                          >
+                            <X size={12} />
+                          </button>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                 </div>
               )}
 

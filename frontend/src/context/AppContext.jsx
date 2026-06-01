@@ -101,6 +101,7 @@ export const AppProvider = ({ children }) => {
   const [currentStreamingEvents, setCurrentStreamingEvents] = useState([]); // SSE event logs
   const [sidebarTab, setSidebarTab] = useState('conversations'); // conversations, reports, settings
   const [apiOnline, setApiOnline] = useState(false);
+  const [initialLoadDone, setInitialLoadDone] = useState(false);
 
   // Sync theme with DOM and localStorage
   useEffect(() => {
@@ -152,6 +153,9 @@ export const AppProvider = ({ children }) => {
         const response = await fetch(`http://localhost:8000/stream/sessions/${sessionId}/chats`);
         const res = await response.json();
         if (res.status === 'success' && res.data) {
+          if (res.data.length === 0) {
+            return;
+          }
           const formattedChats = [];
           res.data.forEach((c, idx) => {
             const timeStr = c.timestamp ? new Date(c.timestamp).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : '';
@@ -277,7 +281,35 @@ export const AppProvider = ({ children }) => {
     setTheme(prev => (prev === 'dark' ? 'light' : 'dark'));
   };
 
-  const createSession = (initialQuery) => {
+  const getOrCreateSession = (defaultTitle = 'New Session') => {
+    if (activeSessionId) return activeSessionId;
+
+    const newId = `session_${Date.now()}`;
+    const timestamp = new Date().toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    }) + ' • ' + new Date().toLocaleTimeString('en-US', {
+      hour: 'numeric',
+      minute: '2-digit',
+    });
+
+    const newSession = {
+      id: newId,
+      title: defaultTitle,
+      timestamp,
+    };
+
+    setSessions(prev => [newSession, ...prev]);
+    setDataSources(prev => ({
+      ...prev,
+      [newId]: []
+    }));
+    setActiveSessionId(newId);
+    return newId;
+  };
+
+  const createSession = async (initialQuery) => {
     const newId = `session_${Date.now()}`;
     const timestamp = new Date().toLocaleDateString('en-US', {
       month: 'short',
@@ -297,27 +329,16 @@ export const AppProvider = ({ children }) => {
     setSessions(prev => [newSession, ...prev]);
     setChats(prev => ({
       ...prev,
-      [newId]: [
-        {
-          id: `msg_user_${Date.now()}`,
-          sender: 'user',
-          text: initialQuery,
-          timestamp: new Date().toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }),
-        }
-      ]
+      [newId]: []
     }));
-
-    // Pre-populate some data sources for new sessions so they aren't empty
     setDataSources(prev => ({
       ...prev,
-      [newId]: [
-        { id: `src_pg_${Date.now()}`, name: 'Sales Database', type: 'PostgreSQL' },
-        { id: `src_csv_${Date.now()}`, name: 'Customer_Insights.csv', type: 'Spreadsheet' }
-      ]
+      [newId]: []
     }));
-
     setActiveSessionId(newId);
-    simulateAiResponse(newId, initialQuery);
+
+    // Call sendMessage to send the actual initialQuery to this new session
+    await sendMessage(initialQuery, newId);
     return newId;
   };
 
@@ -395,8 +416,9 @@ export const AppProvider = ({ children }) => {
     }, 4000);
   };
 
-  const sendMessage = async (text) => {
-    if (!text.trim() || !activeSessionId) return;
+  const sendMessage = async (text, targetSessionId = null) => {
+    const sessionId = targetSessionId || activeSessionId;
+    if (!text.trim() || !sessionId) return;
 
     const userMsg = {
       id: `msg_user_${Date.now()}`,
@@ -407,7 +429,18 @@ export const AppProvider = ({ children }) => {
 
     setChats(prev => ({
       ...prev,
-      [activeSessionId]: [...(prev[activeSessionId] || []), userMsg]
+      [sessionId]: [...(prev[sessionId] || []), userMsg]
+    }));
+
+    // Rename the session title if it's currently 'New Session' or 'New Query'
+    setSessions(prev => prev.map(s => {
+      if (s.id === sessionId && (s.title === 'New Session' || s.title === 'New Query')) {
+        return {
+          ...s,
+          title: text.length > 25 ? text.substring(0, 25) + '...' : text
+        };
+      }
+      return s;
     }));
 
     if (apiOnline) {
@@ -420,7 +453,7 @@ export const AppProvider = ({ children }) => {
         const response = await fetch('http://localhost:8000/stream/', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ session_id: activeSessionId, query: text })
+          body: JSON.stringify({ session_id: sessionId, query: text })
         });
 
         const reader = response.body.getReader();
@@ -450,8 +483,8 @@ export const AppProvider = ({ children }) => {
                   } else if (eventType === 'response_complete') {
                     setChats(prev => ({
                       ...prev,
-                      [activeSessionId]: [
-                        ...(prev[activeSessionId] || []),
+                      [sessionId]: [
+                        ...(prev[sessionId] || []),
                         {
                           id: `msg_ai_${Date.now()}`,
                           sender: 'ai',
@@ -460,7 +493,7 @@ export const AppProvider = ({ children }) => {
                         }
                       ]
                     }));
-                    fetchSessionChartsData(activeSessionId);
+                    fetchSessionChartsData(sessionId);
                   } else {
                     // Pipeline stages
                     setCurrentStreamingEvents(prev => [...prev, { type: eventType, message: data.message || JSON.stringify(data) }]);
@@ -477,10 +510,10 @@ export const AppProvider = ({ children }) => {
         setCurrentStreamingEvents([]);
       } catch (err) {
         console.error('API Stream failed, falling back to simulation', err);
-        simulateAiResponse(activeSessionId, text);
+        simulateAiResponse(sessionId, text);
       }
     } else {
-      simulateAiResponse(activeSessionId, text);
+      simulateAiResponse(sessionId, text);
     }
   };
 
@@ -530,13 +563,34 @@ export const AppProvider = ({ children }) => {
     setActiveSessionId(id);
   };
 
-  const deleteSession = (id) => {
+  const deleteSession = async (id) => {
+    if (apiOnline) {
+      try {
+        await fetch(`http://localhost:8000/ingest/sessions/${id}`, {
+          method: 'DELETE'
+        });
+      } catch (err) {
+        console.error(`Failed to delete session ${id} from backend:`, err);
+      }
+    }
+
     setSessions(prev => prev.filter(s => s.id !== id));
     setChats(prev => {
       const copy = { ...prev };
       delete copy[id];
       return copy;
     });
+    setDataSources(prev => {
+      const copy = { ...prev };
+      delete copy[id];
+      return copy;
+    });
+    setSessionCharts(prev => {
+      const copy = { ...prev };
+      delete copy[id];
+      return copy;
+    });
+
     if (activeSessionId === id) {
       setActiveSessionId(null);
     }
@@ -546,13 +600,20 @@ export const AppProvider = ({ children }) => {
     setActiveSessionId(null);
   };
 
+  useEffect(() => {
+    if (sessions.length > 0 && !activeSessionId && !initialLoadDone) {
+      setActiveSessionId(sessions[0].id);
+      setInitialLoadDone(true);
+    }
+  }, [sessions, activeSessionId, initialLoadDone]);
+
   return (
     <AppContext.Provider value={{
       theme,
       toggleTheme,
       sessions,
       chats,
-      dataSources: dataSources[activeSessionId] || [],
+      dataSources: activeSessionId ? (dataSources[activeSessionId] || []) : [],
       activeSessionId,
       isStreaming,
       currentStreamingText,
@@ -567,11 +628,12 @@ export const AppProvider = ({ children }) => {
       selectSession,
       deleteSession,
       handleNewQueryClick,
-      sessionCharts: sessionCharts[activeSessionId] || [],
+      sessionCharts: activeSessionId ? (sessionCharts[activeSessionId] || []) : [],
       fetchSessionChartsData,
       fetchSessions,
       fetchSessionChats,
       fetchSessionConnections,
+      getOrCreateSession,
     }}>
       {children}
     </AppContext.Provider>

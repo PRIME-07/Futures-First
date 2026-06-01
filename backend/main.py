@@ -5,6 +5,14 @@ from app.core.config import settings
 
 app = FastAPI(title=settings.PROJECT_NAME)
 
+@app.on_event("startup")
+def startup_event():
+    try:
+        from app.core.seeder import seed_databases
+        seed_databases()
+    except Exception as e:
+        print(f"Failed to run auto-seeder on startup: {e}")
+
 # Setup CORS
 # set to "*" for now will configure later
 app.add_middleware(

@@ -46,6 +46,32 @@ def resolve_engine(entry: dict):
         )
     return engine
 
+def build_filter_clause(column_expr: str, column_name: str, value, bind_params: dict, param_prefix: str = "") -> str:
+    TEMPORAL_KEYS = {"year", "month", "date", "period"}
+    is_temporal = column_name.lower() in TEMPORAL_KEYS
+    
+    if isinstance(value, (list, tuple)):
+        if not value:
+            return "1 = 0"
+        sub_clauses = []
+        for idx, val in enumerate(value):
+            param_key = f"{param_prefix}{column_name}_val_{idx}"
+            if is_temporal and isinstance(val, int) and 1900 < val < 2100:
+                sub_clauses.append(f"CAST({column_expr} AS VARCHAR) LIKE :{param_key}")
+                bind_params[param_key] = f"{val}%"
+            else:
+                sub_clauses.append(f"{column_expr} = :{param_key}")
+                bind_params[param_key] = val
+        return "(" + " OR ".join(sub_clauses) + ")"
+    else:
+        param_key = f"{param_prefix}{column_name}"
+        if is_temporal and isinstance(value, int) and 1900 < value < 2100:
+            bind_params[param_key] = f"{value}%"
+            return f"CAST({column_expr} AS VARCHAR) LIKE :{param_key}"
+        else:
+            bind_params[param_key] = value
+            return f"{column_expr} = :{param_key}"
+
 async def run_aggregation(dataset_uuid: str, metric: str, group_by: str, filter_dict: dict = None):
     entry = await get_dataset_entry(dataset_uuid)
     table_name = entry.get("external_table_name") if entry.get("source_type") == "database" else entry["postgres_table_name"]
@@ -69,14 +95,18 @@ async def run_aggregation(dataset_uuid: str, metric: str, group_by: str, filter_
         
         if filter_dict:
             for k, v in filter_dict.items():
-                where_clauses.append(f"{k} = :{k}")
-                bind_params[k] = v
+                clause = build_filter_clause(k, k, v, bind_params)
+                where_clauses.append(clause)
                 
         where_sql = ""
         if where_clauses:
             where_sql = "WHERE " + " AND ".join(where_clauses)
             
-        query_str = f"SELECT {group_by}, SUM({metric}) as total_{metric} FROM {table_name} {where_sql} GROUP BY {group_by} ORDER BY total_{metric} DESC"
+        TEMPORAL_KEYS = {"month", "date", "year", "week", "quarter", "day", "timestamp", "period", "time"}
+        is_temporal = any(t in group_by.lower() for t in TEMPORAL_KEYS)
+        order_by_sql = f"ORDER BY {group_by} ASC" if is_temporal else f"ORDER BY total_{metric} DESC"
+
+        query_str = f"SELECT {group_by}, SUM({metric}) as total_{metric} FROM {table_name} {where_sql} GROUP BY {group_by} {order_by_sql}"
         
         with db_engine.connect() as conn:
             result = conn.execute(text(query_str), bind_params)
@@ -84,7 +114,7 @@ async def run_aggregation(dataset_uuid: str, metric: str, group_by: str, filter_
 
     return await asyncio.to_thread(_execute)
 
-async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, metric: str, group_by: str):
+async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, metric: str, group_by: str, filter_dict: dict = None):
     try:
         left_entry = await get_dataset_entry(left_uuid)
         right_entry = await get_dataset_entry(right_uuid)
@@ -94,6 +124,7 @@ async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, m
         
         left_cols = left_entry.get("columns", [])
         right_cols = right_entry.get("columns", [])
+        all_cols = set(left_cols) | set(right_cols)
         
         # Check if both datasets are on the same engine (same-server join)
         left_source = left_entry.get("source_type", "uploaded")
@@ -104,7 +135,7 @@ async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, m
         ):
             raise ValueError(
                 "Cannot perform SQL join across different database sources. "
-                "Use pandas_cross_dataset_correlation for cross-source analysis."
+                "Use pandas_multi_join for cross-source analysis."
             )
         
         db_engine = resolve_engine(left_entry)
@@ -133,15 +164,29 @@ async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, m
         metric_col = f"r.{metric}" if r_metric else f"l.{metric}"
 
         def _execute():
+            # Build optional WHERE clause from filter_dict
+            where_clauses = []
+            bind_params = {}
+            if filter_dict:
+                for k, v in filter_dict.items():
+                    # Determine which alias to use for this filter column
+                    alias = "l" if k in left_cols else "r"
+                    column_expr = f"{alias}.{k}"
+                    clause = build_filter_clause(column_expr, k, v, bind_params, param_prefix="filter_")
+                    where_clauses.append(clause)
+
+            where_sql = "WHERE " + " AND ".join(where_clauses) if where_clauses else ""
+
             query_str = f"""
                 SELECT {group_by_col} as {group_by}, SUM({metric_col}) as total_{metric}
                 FROM {left_table} l
                 JOIN {right_table} r ON l.{join_key} = r.{join_key}
+                {where_sql}
                 GROUP BY {group_by_col}
                 ORDER BY total_{metric} DESC
             """
             with db_engine.connect() as conn:
-                result = conn.execute(text(query_str))
+                result = conn.execute(text(query_str), bind_params)
                 return sanitize_rows([dict(row._mapping) for row in result])
 
         return await asyncio.to_thread(_execute)
@@ -149,4 +194,4 @@ async def run_join_aggregation(left_uuid: str, right_uuid: str, join_key: str, m
     except ValueError as e:
         raise ValueError(str(e))
     except Exception as e:
-        raise ValueError("cant join as no matching columns are found")
+        raise ValueError(f"Join aggregation failed: {e}")

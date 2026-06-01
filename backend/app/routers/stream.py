@@ -31,21 +31,53 @@ def is_casual_query(query: str) -> bool:
         return True
     return False
 
+async def is_conversational_query(query: str) -> bool:
+    try:
+        system_prompt = (
+            "You are an intent classifier. Categorize the user's input into one of two categories:\n"
+            "- 'conversational': If the user is greeting you, asking how you are, asking what you are, asking about your capabilities, "
+            "asking what data you can see/access, asking for help on how to use the app, making general chitchat, "
+            "or asking off-topic requests (like writing poems, stories, code/programming questions, essays, recipes, etc.).\n"
+            "- 'analytical': If the user is asking for specific analysis, calculations, trends, metrics, correlations, outliers, or questions "
+            "about their business data (e.g. sales, churn, pricing, performance, marketing spend, EV sales, etc.).\n"
+            "Respond with a JSON object containing exactly one key 'category' with the value 'conversational' or 'analytical'."
+        )
+        response = await client.chat.completions.create(
+            model=settings.MODEL_NAME,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": query}
+            ],
+            response_format={"type": "json_object"},
+            temperature=0.0
+        )
+        data = json.loads(response.choices[0].message.content)
+        return data.get("category") == "conversational"
+    except Exception as e:
+        logger.error(f"Error in is_conversational_query classifier: {e}")
+        return is_casual_query(query)
+
 async def sse_generator(req: StreamRequest):
     queue = asyncio.Queue()
     
     async def run_pipeline():
         try:
-            if is_casual_query(req.query):
+            if await is_conversational_query(req.query):
                 await queue.put(f"event: pipeline_start\ndata: {json.dumps({'message': 'Analyzing request...'})}\n\n")
                 await queue.put(f"event: synthesis_start\ndata: {json.dumps({'message': 'Formulating friendly response...'})}\n\n")
                 
                 system_prompt = """You are Insight Monkey, a highly skilled executive data analyst and business intelligence assistant.
-Since the user is greeting you or asking for general assistance (rather than providing structured analytics data queries), respond warmly and elegantly.
+Since the user is greeting you, asking about your capabilities, or asking general chitchat (rather than requesting specific data calculations), respond warmly and elegantly.
+Always be warm, welcoming, and explicitly introduce yourself in the first sentence (e.g., if the user says 'hi', start with 'Hi! I'm Insight Monkey, your dedicated AI business intelligence assistant. I can help you...').
+
+OFF-TOPIC POLICY:
+If the user's input asks you to write creative fiction (stories, poems, jokes), essays, code/programming files, recipes, or perform any task unrelated to business intelligence and data analytics, you MUST kindly and politely refuse to answer. Explain that your capabilities are strictly focused on business data analytics, statistical modeling, RAG document search, and interactive visualizations. Do not fulfill off-topic requests under any circumstances.
+
 Briefly explain how you can help them:
 - They can upload CSV/Excel business datasets or PDF reports.
 - They can ask you to correlate metrics, calculate rolling averages, detect outliers, perform categorical profiling, or run complex SQL/Pandas analytical summaries.
 - You can generate dynamic, beautiful interactive charts (Composed, Bar, Line, Area, Scatter, etc.) and perform transient PDF RAG citation searches.
+- If they ask what data you can access or see, explain that you have full access to all the active data sources and connections loaded into the session, which are listed and visible in the right sidebar panel.
 Keep your response warm, friendly, executive, and under 3 paragraphs."""
 
                 messages = [

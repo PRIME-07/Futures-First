@@ -53,6 +53,13 @@ services:
     ports:
       - "3307:3306"
 
+  chromadb:
+    image: chromadb/chroma:latest
+    volumes:
+      - chroma_data:/chroma/chroma
+    ports:
+      - "8002:8000"
+
   api:
     build: 
       context: .
@@ -68,14 +75,29 @@ services:
       - postgres_movies
       - postgres_automotive
       - mysql_ecommerce
+      - chromadb
     environment:
       # Override local URLs with container hostnames
       POSTGRES_URL: "postgresql://user:password@postgres:5432/analytics_db"
       MONGO_URL: "mongodb://mongodb:27017"
       MONGO_DB: "analytics"
+      CHROMA_HOST: "chromadb"
+      CHROMA_PORT: "8000"
     env_file:
       - .env
     command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    depends_on:
+      - api
 
 volumes:
   postgres_data:
@@ -83,3 +105,4 @@ volumes:
   postgres_movies_data:
   postgres_automotive_data:
   mysql_ecommerce_data:
+  chroma_data:

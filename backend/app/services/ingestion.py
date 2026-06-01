@@ -184,6 +184,15 @@ async def delete_file_from_session(session_id: str, filename: str):
         ]
     })
     if pdf_doc:
+        # Delete from ChromaDB
+        try:
+            from app.services.rag_engine import get_or_create_collection
+            collection = get_or_create_collection()
+            # chroma delete where both session_id and filename match
+            collection.delete(where={"$and": [{"session_id": session_id}, {"filename": pdf_doc.get("filename", filename)}]})
+        except Exception as e:
+            print(f"Failed to delete {filename} from ChromaDB: {e}")
+            
         await mongo_db.pdf_registry.delete_one({"_id": pdf_doc["_id"]})
         return {"status": "success", "message": f"Successfully removed PDF '{filename}' from session"}
 
@@ -221,5 +230,13 @@ async def delete_session_data(session_id: str):
     await mongo_db.sql_connections.delete_many({"session_id": session_id})
     await mongo_db.chats.delete_many({"session_id": session_id})
     
+    # 3. Clear ChromaDB document chunks for the session
+    try:
+        from app.services.rag_engine import get_or_create_collection
+        collection = get_or_create_collection()
+        collection.delete(where={"session_id": session_id})
+    except Exception as e:
+        print(f"Failed to clear ChromaDB session data during session wipe: {e}")
+        
     return {"status": "success", "message": f"Wiped all datasets, PDFs, charts, connections, and chats for session '{session_id}'"}
 

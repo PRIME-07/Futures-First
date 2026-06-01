@@ -202,7 +202,7 @@ export default function MainChat() {
 
       {/* Main Content Area */}
       <div className="flex-grow overflow-y-auto px-4 md:px-12 py-6 flex flex-col gap-6 scrollbar-none pb-32">
-        {!activeSessionId ? (
+        {activeMessages.length === 0 ? (
           /* ================= LANDING PAGE ================= */
           <div className="flex-grow flex flex-col items-center justify-center w-full max-w-4xl mx-auto text-center gap-6 mt-12 md:mt-24">
             <div className="flex flex-col items-center gap-4">
@@ -221,22 +221,20 @@ export default function MainChat() {
 
             {/* Single Large Landing Chat Input - 70% width */}
             <form onSubmit={handleSubmit} className="w-[70%] mx-auto relative group mt-4">
-              <div className="w-full bg-white dark:bg-[#0c0d12]/90 border border-orange-500/20 dark:border-orange-500/15 rounded-2xl p-4 flex flex-col gap-3 shadow-lg hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all focus-within:ring-2 focus-within:ring-orange-500/10 focus-within:border-orange-500/40">
+              <div className="w-full bg-white dark:bg-[#0c0d12]/90 border border-orange-500/20 dark:border-orange-500/15 rounded-2xl px-5 py-3 flex items-center gap-3 shadow-lg hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all focus-within:ring-2 focus-within:ring-orange-500/10 focus-within:border-orange-500/40">
                 <input
                   type="text"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="Ask a question..."
-                  className="w-full bg-transparent border-none text-sm focus:outline-none placeholder-gray-400 text-gray-800 dark:text-white py-1"
+                  className="flex-grow bg-transparent border-none text-sm focus:outline-none placeholder-gray-400 text-gray-800 dark:text-white py-1"
                 />
-                <div className="flex items-center justify-end border-t border-orange-500/20 dark:border-orange-500/15 pt-2 text-gray-400">
-                  <button
-                    type="submit"
-                    className="p-1.5 rounded-lg bg-[#f97316] hover:bg-[#ea580c] text-white transition-all cursor-pointer hover:scale-[1.03]"
-                  >
-                    <Send size={14} />
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="p-2 rounded-xl bg-[#f97316] hover:bg-[#ea580c] text-white transition-all cursor-pointer hover:scale-[1.03] shrink-0"
+                >
+                  <Send size={15} />
+                </button>
               </div>
             </form>
           </div>
@@ -298,10 +296,10 @@ export default function MainChat() {
                         const configX = c.config && c.config.x_key ? c.config.x_key.toLowerCase() : '';
                         
                         return bracketTerms.some(term => 
-                          chartId.includes(term) || 
-                          chartTitle.includes(term) || 
-                          term.includes(chartTitle) ||
-                          configX.includes(term)
+                           chartId.includes(term) || 
+                           chartTitle.includes(term) || 
+                           term.includes(chartTitle) ||
+                           configX.includes(term)
                         );
                       });
 
@@ -406,26 +404,24 @@ export default function MainChat() {
       </div>
 
       {/* Sticky Bottom Chat Input for Active Sessions */}
-      {activeSessionId && (
+      {activeSessionId && activeMessages.length > 0 && (
         <div className="absolute bottom-0 left-0 right-0 p-4 md:p-6 bg-gradient-to-t from-gray-50/90 dark:from-[#08080a]/90 via-gray-50/50 dark:via-[#08080a]/50 to-transparent pointer-events-none">
           <div className="w-[70%] mx-auto pointer-events-auto">
             <form onSubmit={handleSubmit} className="relative group">
-              <div className="w-full bg-white/80 dark:bg-[#0c0d12]/90 border border-orange-500/20 dark:border-orange-500/15 rounded-xl p-3 flex flex-col gap-2.5 shadow-lg backdrop-blur-md hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all focus-within:ring-2 focus-within:ring-orange-500/10 focus-within:border-orange-500/40">
+              <div className="w-full bg-white/80 dark:bg-[#0c0d12]/90 border border-orange-500/20 dark:border-orange-500/15 rounded-xl px-4 py-2 flex items-center gap-3 shadow-lg backdrop-blur-md hover:border-orange-500/40 dark:hover:border-orange-500/40 transition-all focus-within:ring-2 focus-within:ring-orange-500/10 focus-within:border-orange-500/40">
                 <input
                   type="text"
                   value={inputText}
                   onChange={(e) => setInputText(e.target.value)}
                   placeholder="Ask anything about your business data..."
-                  className="w-full bg-transparent border-none text-sm focus:outline-none placeholder-gray-400 text-gray-800 dark:text-white py-0.5"
+                  className="flex-grow bg-transparent border-none text-sm focus:outline-none placeholder-gray-400 text-gray-800 dark:text-white py-1"
                 />
-                <div className="flex items-center justify-end border-t border-orange-500/20 dark:border-orange-500/15 pt-2 text-gray-400">
-                  <button
-                    type="submit"
-                    className="p-1.5 rounded-md bg-[#f97316] hover:bg-[#ea580c] text-white transition-all cursor-pointer hover:scale-[1.03]"
-                  >
-                    <Send size={13} />
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="p-1.5 rounded-lg bg-[#f97316] hover:bg-[#ea580c] text-white transition-all cursor-pointer hover:scale-[1.03] shrink-0"
+                >
+                  <Send size={14} />
+                </button>
               </div>
             </form>
           </div>
