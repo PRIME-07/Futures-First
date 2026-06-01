@@ -1,4 +1,8 @@
-# <img src="frontend/src/assets/logo.svg" width="36" height="36" align="center" style="vertical-align: middle; margin-right: 8px;" /> 🐒 Insight Monkey — Secure AI Insights Assistant
+<p align="center">
+  <img src="frontend/src/assets/logo.svg" width="120" height="120" alt="Insight Monkey Logo" />
+</p>
+
+<h1 align="center">Insight Monkey — Secure AI Insights Assistant</h1>
 
 Insight Monkey is a state-of-the-art, secure, multi-source enterprise business intelligence and analytics assistant. Built to combine structured relational data, unstructured document text (PDFs), and uploaded spreadsheets (CSV/Excel) within high-integrity private sessions, it empowers executives and analysts to extract decision-ready insights, compute critical temporal business metrics, and generate beautiful interactive charts—all within a single private and secure AI conversation.
 
